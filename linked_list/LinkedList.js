@@ -25,6 +25,7 @@ class LinkedList {
         }
         prevNode.next = newNode;
         newNode.next = head;
+        return newNode;
     }
     delete(position = this.totalElements) {
         if(position === 1) {
@@ -41,6 +42,21 @@ class LinkedList {
         else 
             console.log("Position does not exists.");
     }
+    // iterative version
+    reverse() {
+        let current = this.head;
+        let prev = null;
+        let next;
+
+        while(current) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        this.head = prev;
+    }
+    
     display() {
         let head = this.head;
         while(head!=null) {
@@ -52,17 +68,18 @@ class LinkedList {
 
 let list = new LinkedList();
 
-list.insert(1);
-list.insert(2, 2);
-list.insert(3, 3);
-list.insert(4, 4);
-list.insert(5, 5);
+// list.insert(1);
+// list.insert(2, 2);
+// list.insert(3, 3);
+// list.insert(4, 4);
+// list.insert(5, 5);
 
-list.insert(6);
+// list.insert(6);
 
-list.delete(7);
+// // list.delete(7);
 
+// list.reverse();
 
-list.display();
+// list.display();
 
 module.exports = LinkedList;

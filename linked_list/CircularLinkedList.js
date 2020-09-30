@@ -54,15 +54,19 @@ class CircularLinkedList {
             tail.next = this.head;
             return;
         }
-        let count = 1;
+        let count = 1, prevNode;
         while(tail.next != this.head && count < position-1) {
             count++;
+            prevNode = tail;
             tail = tail.next;
         }
-        if(count !== position-1) {
-            throw new Error("Position does not exists.");
-        }
-        tail.next = tail.next.next;
+        // if(count !== position-1) {
+        //     throw new Error("Position does not exists.");
+        // }
+        if(tail.next === this.head)
+            prevNode.next = this.head;
+        else
+            tail.next = tail.next.next;
     }
     display() {
         if(!this.head) return;
@@ -74,19 +78,19 @@ class CircularLinkedList {
     }
 }
 
-let list = new CircularLinkedList();
+// let list = new CircularLinkedList();
 
-list.insert(1);
-list.insert(2, 2);
+// list.insert(1);
+// list.insert(2, 2);
 // list.insert(3, 3);
 // list.insert(4, 4);
 // list.insert(5, 5);
 
-// list.insert(6, 1);
+// list.insert(6, 6);
 
-list.delete(7);
+// list.delete(7);
 
-list.display();
+// list.display();
 
 
 module.exports = CircularLinkedList;
