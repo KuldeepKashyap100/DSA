@@ -37,8 +37,10 @@ class LinkedList {
             head = head.next;
             count++;
         }
-        if(head)
+        if(head) {
             prevNode.next = head.next;
+            return head.data;
+        }
         else 
             console.log("Position does not exists.");
     }

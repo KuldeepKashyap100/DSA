@@ -1,6 +1,6 @@
 const CircularLinkedList = require("../linked_list/CircularLinkedList");
 
-// [time -> o(n)] and [space -> o(1)]
+// [time -> o(n^2)] and [space -> o(1)]
 const getLeader = (list, personToBeEliminated) => {
     let head = list.head;
     let count;

@@ -34,7 +34,6 @@ const checkPalindrome = (list) => {
         fastPtr = fastPtr.next;
     }
     return true;
-    // console.log(slowPtr, "kk", fastPtr);
 }
 
 let list = new LinkedList();
