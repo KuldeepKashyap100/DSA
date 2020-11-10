@@ -61,20 +61,20 @@ class DoublyLinkedList {
     }
 }
 
-let list = new DoublyLinkedList();
+// let list = new DoublyLinkedList();
 
 
-list.insert(1);
-list.insert(2, 2);
-list.insert(3, 3);
-list.insert(4, 4);
-list.insert(5, 5);
+// list.insert(1);
+// list.insert(2, 2);
+// list.insert(3, 3);
+// list.insert(4, 4);
+// list.insert(5, 5);
 
-// list.insert(6, 6);
+// // list.insert(6, 6);
 
-list.delete(6);
+// list.delete(6);
 
 
-list.display();
+// list.display();
 
 module.exports = DoublyLinkedList;

@@ -97,8 +97,35 @@ class BinarySearchTree {
         }
         return root;
     }
-    delete(data) {
-        
+    deleteRecursive(data, root = this.root) {
+        if(root === null) {
+            console.log("node not found");
+            return;
+        }
+        else if(root.data > data) {
+            root.left = this.deleteRecursive(data, root.left);
+        }
+        else if(root.data < data) {
+            root.right = this.deleteRecursive(data, root.right);
+        }
+        else {
+            if(root.left && root.right) {
+                // have 2 child
+                const maxNodeInLeftSubTree = this.findMaxRecursive(root.left);
+                root.data = maxNodeInLeftSubTree.data;
+                root.left = this.deleteRecursive(root.data, root.left);
+            }
+            else {
+                // have one child
+                if(root.left)
+                    root = root.left;
+                else if(root.right)
+                    root = root.right;
+                else
+                    root = null;
+            }
+        }
+        return root;
     }
     display() {
         const queue = [];
@@ -114,16 +141,23 @@ class BinarySearchTree {
     }
 }
 
-const binarySearchTree = new BinarySearchTree();
-binarySearchTree.insert(5);
-binarySearchTree.insert(3);
-binarySearchTree.insert(8);
-binarySearchTree.insert(4);
-binarySearchTree.insert(1);
-binarySearchTree.insert(7);
-binarySearchTree.insert(10);
+// const binarySearchTree = new BinarySearchTree();
+// binarySearchTree.insert(5);
+// binarySearchTree.insert(3);
+// binarySearchTree.insert(8);
+// binarySearchTree.insert(4);
+// binarySearchTree.insert(1);
+// binarySearchTree.insert(7);
+// binarySearchTree.insert(10);
 
 
-console.log(binarySearchTree.findMax());
+// // console.log(binarySearchTree.findMax());
 
 // binarySearchTree.display();
+
+// binarySearchTree.deleteRecursive(8);
+
+// console.log("\n");
+// binarySearchTree.display();
+
+module.exports = BinarySearchTree;
