@@ -82,7 +82,7 @@ class BinarySearchTree {
         }
         return root;
     }
-    findMaxRecursive(root = this.root) {
+    findMaxRecursive(root) {
         if(!root)
             return null;
         else if(root.right === null)
@@ -97,7 +97,7 @@ class BinarySearchTree {
         }
         return root;
     }
-    deleteRecursive(data, root = this.root) {
+    deleteRecursive(data, root) {
         if(root === null) {
             console.log("node not found");
             return;

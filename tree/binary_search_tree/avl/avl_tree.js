@@ -88,6 +88,59 @@ class AVL {
                 queue.push(dequeuedItem.right);
         }
     }
+    findMax() {
+        let root = this.root;
+        while(root.right) {
+            root = root.right;
+        }
+        return root;
+    }
+    findMaxRecursive(root) {
+        if(!root)
+            return null;
+        else if(root.right === null)
+            return root;
+        else 
+            return this.findMaxRecursive(root.right);
+    }
+    // dummy insert
+    insert(data) {
+        this.insertRecursive(this.root, data);
+    }
+    // dummy delete
+    delete(data) {
+        return this.deleteRecursive(data, this.root);
+    }
+    deleteRecursive(data, root) {
+        if(root === null) {
+            console.log("node not found");
+            return;
+        }
+        else if(root.data > data) {
+            root.left = this.deleteRecursive(data, root.left);
+        }
+        else if(root.data < data) {
+            root.right = this.deleteRecursive(data, root.right);
+        }
+        else {
+            if(root.left && root.right) {
+                // have 2 child
+                const maxNodeInLeftSubTree = this.findMaxRecursive(root.left);
+                root.data = maxNodeInLeftSubTree.data;
+                root.left = this.deleteRecursive(root.data, root.left);
+            }
+            else {
+                // have one child
+                if(root.left)
+                    root = root.left;
+                else if(root.right)
+                    root = root.right;
+                else
+                    root = null;
+            }
+        }
+        return root;
+    }
 }
 
 const avlTree = new AVL();
