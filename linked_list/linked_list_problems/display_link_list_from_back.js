@@ -1,4 +1,4 @@
-const LinkedList = require("../linked_list/LinkedList");
+const LinkedList = require("../LinkedList");
 
 // [time -> o(n)] and [space -> o(n) for stack]
 const displayReverseList = (head) => {

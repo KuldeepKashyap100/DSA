@@ -1,4 +1,4 @@
-const Stack = require('../stack/Stack').LinkedListStack;
+const Stack = require('../Stack').LinkedListStack;
 /**
  * Create an empty stack called opstack for keeping operators. Create an empty list for output.
  * Convert the input infix string to a list by using the string method split.
