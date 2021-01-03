@@ -1,9 +1,8 @@
 class MaxHeap { 
-    constructor(type = "max heap", array = [], length = 0) {
+    constructor(array = []) {
         this.array = array;
-        this.length = length;
+        this.length = this.array.length;
         // this.capacity = capacity;
-        this.type = type;
     }
     getParent(childIndex) {
         if(childIndex <= 0 || childIndex >= this.length)
@@ -29,13 +28,12 @@ class MaxHeap {
     percolateDown(index) {
         const leftChild = this.getLeftChild(index);
         const rightChild = this.getRightChild(index);
-        let maxIndex;
-
+        
         // find max children
+        let maxIndex = index;
         if(leftChild && this.array[index] < this.array[leftChild]) 
             maxIndex = leftChild;
-        else
-            maxIndex = index;
+
         if(rightChild && this.array[maxIndex] < this.array[rightChild])
             maxIndex = rightChild;
         
@@ -309,21 +307,17 @@ class PriorityQueueMin {
         return itemToBeDeleted;
     }
 }
-// const priorityQueue = new PriorityQueueMin();
-// priorityQueue.enqueue(new Node(11,6));
-// priorityQueue.enqueue(new Node(66, 7));
-// priorityQueue.enqueue(new Node(12, 5));
-// priorityQueue.enqueue(new Node(33, 3));
-// priorityQueue.enqueue(new Node(66, 8));
-
-// console.log(priorityQueue.dequeue());
-// console.log(priorityQueue.dequeue());
-// console.log(priorityQueue.dequeue());
-// console.log(priorityQueue.dequeue());
-
-
-
-
 
 
 module.exports = { MaxHeap, MinHeap, PriorityQueueMax, PriorityQueueMin };
+
+
+
+/**
+ * Heap sort unstable example
+ * Consider array 21 20a 20b  12 11 8 7 (already in max-heap format).
+ * here 20a = 20b just to differentiate the order we represent them as 20a and 20b.
+ * While heapsort first 21 is removed and placed in the last index 
+ * then 20a is removed and placed in last but one index and 20b in the last but two index 
+ * so after heap sort the array looks like 7 8 11 12 20b 20a 21.
+ */
