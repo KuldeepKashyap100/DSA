@@ -177,7 +177,7 @@ const Node = function(data, priority) {
 }
 
 class PriorityQueueMax {
-    constructor(type = "max") {
+    constructor() {
         this.array = [];
         this.length = 0;
     }
@@ -239,6 +239,9 @@ class PriorityQueueMax {
         this.percolateDown(0);
 
         return itemToBeDeleted.data;
+    }
+    getMax() {
+        return this.array[0];
     }
 }
 

@@ -15,7 +15,7 @@ const checkMajorityExists = (input) => {
     Math.floor(input.length / 2) < count ? console.log(count) : console.log(false); 
 }
 
-// alternate way
+// alternate way Moore’s Voting Algorithm
 // time -> O(n) | space -> O(1)
 const checkMajorityExistsAlternate = (input) => {
     let count = 0, element;
