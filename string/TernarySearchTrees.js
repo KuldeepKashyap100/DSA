@@ -11,6 +11,7 @@ class TernarySearchTrees {
     constructor() {
         this.root = null;
     }
+    // time -> O(L) where L is length of the longest string
     search(targetStr) {
         if(!targetStr) return null;
         
@@ -36,48 +37,80 @@ class TernarySearchTrees {
         console.log("not found");
     }
 
+    // try writing recursive version of it if got time.
+    // time -> O(L) where L is length of the longest string
     insert(strToBeInserted) {
-        if(!this.root) {
-            this.root = new Node(strToBeInserted[0]);
-        }
-        let root = this.root, prev;
-        let i = 0;
-        // find first character
-        while(root) {
-            prev = root;
-            if(root.data === strToBeInserted[i]) {
-                break;
-            }
-            else if(root.data > strToBeInserted[i]) {
-                root = root.left;
-            }
-            else if(root.data < strToBeInserted[i]) {
-                root = root.right;
-            }
-        }
-
-        if(!root) root = prev;
-        else i++;
-        while(i < strToBeInserted.length) {
-            const newNode = new Node(strToBeInserted[i]);
-            if(!root.eq) {
-                root.eq = newNode;
-                if(i === strToBeInserted.length - 1) {
-                    root.eq.terminating++;
-                }
-                root = root.eq;
-            }
-            else if(root.eq.data !== strToBeInserted[i]) {
-                if(strToBeInserted[i] < root.data) {
-
-                }
-            }
-            i++;
-        }
+        this.root = this.insertNode(this.root, strToBeInserted, 0);
     }
+
+    insertNode(root, strToBeInserted, i) {
+        if(!root) {
+            const newNode = new Node(strToBeInserted[i]);
+            if(i === strToBeInserted.length - 1) {
+                newNode.terminating++;
+                return newNode
+            }
+            else {
+                newNode.eq = this.insertNode(newNode.eq, strToBeInserted, i + 1);
+                return newNode;
+            }
+        }
+        
+        if(strToBeInserted[i] < root.data) {
+            root.left = this.insertNode(root.left, strToBeInserted, i);
+        }
+        else if(strToBeInserted[i] > root.data) {
+            root.right = this.insertNode(root.right, strToBeInserted, i);
+        }
+        else {
+            if(i === strToBeInserted.length - 1) {
+                root.terminating++;
+            }
+            else {
+                root.eq = this.insertNode(root.eq, strToBeInserted, i + 1);
+            }
+        }
+        return root;
+    }
+    
+    // time -> O(L) where L is length of the longest string
+    delete(strToBeDeleted) {
+        this.root = this.deleteNode(this.root, strToBeDeleted, 0);
+    }
+
+    deleteNode(root, strToBeDeleted, i) {
+        if(strToBeDeleted[i] < root.data) {
+            root.left = this.deleteNode(root.left, strToBeDeleted, i);
+        }
+        else if(strToBeDeleted[i] > root.data) {
+            root.right = this.deleteNode(root.right, strToBeDeleted, i);
+        }
+        else {
+            if(i === strToBeDeleted.length - 1) {
+                root.terminating--;
+            }
+            else {
+                root.eq = this.deleteNode(root.eq, strToBeDeleted, i + 1);
+            }
+        }
+        return root;
+    }
+    
+    maxLengthOfLartestWord(root) {
+        if(!root) return 0;
+        return Math.max(this.maxLengthOfLartestWord(root.left), this.maxLengthOfLartestWord(root.eq) + 1, this.maxLengthOfLartestWord(root.right));
+    }
+
 }
 
-const trie = new TernarySearchTrees();
+const tst = new TernarySearchTrees();
 const input = ["pqrs", "pprt", "psst", "qqrs", "pqrs"];
-input.forEach(str => trie.insert(str));
-trie.search("pqrs");
+input.forEach(str => tst.insert(str));
+tst.search("pqrs");
+
+tst.delete("pqrs");
+
+tst.search("pqrs");
+
+console.log(tst.maxLengthOfLartestWord(tst.root));
+
