@@ -9,6 +9,7 @@ class BinarySearchTree {
     constructor() {
         this.root = null;
     }
+	// time -> average case -> O(logn), worst case -> O(n)| space -> average case -> O(logn), worst case -> O(n)
     insertRecursive(root, data) {
         if(root === null) {
             const newNode = new Node(data);
@@ -24,6 +25,7 @@ class BinarySearchTree {
         this.root = root;
         return root;
     }
+	// time -> average case -> O(logn), worst case -> O(n)| space -> O(1)
     insert(data) {
         let root = this.root;
         const newNode = new Node(data);
@@ -46,6 +48,89 @@ class BinarySearchTree {
         else
             prev.right = newNode;
     }
+	// time -> average case -> O(logn), worst case -> O(n) | space -> average case -> O(logn), worst case -> O(n)
+    deleteRecursive(data, root) {
+        if(root === null) {
+            console.log("node not found");
+            return;
+        }
+        else if(root.data > data) {
+            root.left = this.deleteRecursive(data, root.left);
+        }
+        else if(root.data < data) {
+            root.right = this.deleteRecursive(data, root.right);
+        }
+        else {
+            if(root.left && root.right) {
+                // have 2 child
+                const maxNodeInLeftSubTree = this.findMaxRecursive(root.left);
+                root.data = maxNodeInLeftSubTree.data;
+                root.left = this.deleteRecursive(root.data, root.left);
+            }
+            else {
+                // have one child
+                if(root.left)
+                    root = root.left;
+                else if(root.right)
+                    root = root.right;
+                else
+                    root = null;
+            }
+        }
+        return root;
+    }
+	// time -> average case -> O(logn), worst case -> O(n)| space -> O(1)
+    delete(data) {
+        let root = this.root, prev;
+        while(root && root.data !== data) {
+            prev = root;
+            if(root.data > data) root = root.left;
+            else root = root.right;
+        }
+        if(!root) throw new Error("not found");
+
+        if(!root.left || !root.right) {
+            let relocateNode;
+            if(!root.left) relocateNode = root.right;
+            else relocateNode = root.left;
+
+            // check if the node to
+            // be deleted is the root.
+            if(!prev) this.root = relocateNode;
+
+            // check if the node to be deleted
+            // is prev's left or right child
+            // and then replace this with relocateNode
+            if(prev.left === root) prev.left = relocateNode;
+            else prev.right = relocateNode;
+        }
+        else {
+            let inOrderSuccessor = root.right, prev;
+            while(inOrderSuccessor.left !== null) {
+                prev = inOrderSuccessor;
+                inOrderSuccessor = inOrderSuccessor.left;
+            }
+            // check if prev moved or not (if it does not moved it means root.right is inorder successor)
+            if(prev) prev.left = inOrderSuccessor.right;
+            // else remove the inorder successor from its place 
+            else root.right = inOrderSuccessor.right;
+            root.data = inOrderSuccessor.data;
+        }
+        return root;
+    }
+    display() {
+        const queue = [];
+        queue.push(this.root);
+        while(queue.length) {
+            const temp = queue.shift();
+            console.log(temp.data);
+            if(temp.left) 
+                queue.push(temp.left);
+            if(temp.right) 
+                queue.push(temp.right);
+        }
+    }
+    // time -> average case -> O(logn), worst case -> O(n)| space -> average case -> O(logn), worst case -> O(n)
     findRecursive(root, data) {
         if(!root)
             return null;
@@ -55,6 +140,7 @@ class BinarySearchTree {
             return this.findRecursive(root.right, data);
         return root;
     }
+    // time -> average case -> O(logn), worst case -> O(n) | space -> O(1)
     find(data) {
         let root = this.root;
         while(root) {
@@ -97,48 +183,6 @@ class BinarySearchTree {
         }
         return root;
     }
-    deleteRecursive(data, root) {
-        if(root === null) {
-            console.log("node not found");
-            return;
-        }
-        else if(root.data > data) {
-            root.left = this.deleteRecursive(data, root.left);
-        }
-        else if(root.data < data) {
-            root.right = this.deleteRecursive(data, root.right);
-        }
-        else {
-            if(root.left && root.right) {
-                // have 2 child
-                const maxNodeInLeftSubTree = this.findMaxRecursive(root.left);
-                root.data = maxNodeInLeftSubTree.data;
-                root.left = this.deleteRecursive(root.data, root.left);
-            }
-            else {
-                // have one child
-                if(root.left)
-                    root = root.left;
-                else if(root.right)
-                    root = root.right;
-                else
-                    root = null;
-            }
-        }
-        return root;
-    }
-    display() {
-        const queue = [];
-        queue.push(this.root);
-        while(queue.length) {
-            const temp = queue.shift();
-            console.log(temp.data);
-            if(temp.left) 
-                queue.push(temp.left);
-            if(temp.right) 
-                queue.push(temp.right);
-        }
-    }
 }
 
 // const binarySearchTree = new BinarySearchTree();
@@ -151,11 +195,11 @@ class BinarySearchTree {
 // binarySearchTree.insert(10);
 
 
-// // console.log(binarySearchTree.findMax());
+// console.log(binarySearchTree.findMax());
 
 // binarySearchTree.display();
 
-// binarySearchTree.deleteRecursive(8);
+// binarySearchTree.delete(5);
 
 // console.log("\n");
 // binarySearchTree.display();

@@ -10,16 +10,23 @@ const preOrderTraversal = (root) => {
 // preorder non recursive
 const preOrderTraversalNonRecursive = (root) => {
     const stack = [];
-    while(true) {
-        while(root) {
-            console.log(root.data);
-            stack.push(root);
-            root = root.left;
-        }
-        if(!stack.length)
-            break;
-        root = stack.pop();
-        root = root.right;
+    // while(true) {
+    //     while(root) {
+    //         console.log(root.data);
+    //         stack.push(root);
+    //         root = root.left;
+    //     }
+    //     if(!stack.length)
+    //         break;
+    //     root = stack.pop();
+    //     root = root.right;
+    // }
+    stack.push(root);
+    while(stack.length) {
+        const currentElement = stack.pop();
+        console.log(currentElement.data);
+        if(currentElement.right) stack.push(currentElement.right);
+        if(currentElement.left) stack.push(currentElement.left); 
     }
 }
 
@@ -137,3 +144,4 @@ root.right.left = new Node(6);
 root.right.right = new Node(7);
 
 preOrderTraversal(root);
+preOrderTraversalNonRecursive(root);

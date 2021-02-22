@@ -7,7 +7,7 @@ const sort = (inputArr, endIndex) => {
 }
 
 const insert = (inputArr, element) => {
-    if(inputArr.length === 0 || element>= inputArr[inputArr.length-1]) {
+    if(inputArr.length === 0 || element >= inputArr[inputArr.length-1]) {
         inputArr.push(element);
         return;
     }

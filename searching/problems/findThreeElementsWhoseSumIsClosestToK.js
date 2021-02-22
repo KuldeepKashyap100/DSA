@@ -4,7 +4,6 @@ const findThreeElementsWhoseSumIsClosestToK = (input, k) => {
     let closestSum = Infinity;
     for(let i = 0; i < input.length - 2; i++) {
         let left = i + 1, right = input.length - 1;
-        let positiveClosest = Infinity, negativeClosest = -Infinity;
         while(left < right) {
             const currentSum = input[i] + input[left] + input[right];
             if(Math.abs(k - closestSum) > Math.abs(k - currentSum)) closestSum = currentSum;
