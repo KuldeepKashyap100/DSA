@@ -72,7 +72,7 @@ const longestCommonSubStringDynamicProgramming = (a, b) => {
 
 let a = "abcdefghijklmno";
 let b = "abdsefg";
-a = "abcdaf";
-b = "zbcdf";
+// a = "abcdaf";
+// b = "zbcdf";
 // longestCommonSubStringBruteForce(a, b);
 longestCommonSubStringDynamicProgramming(a, b);

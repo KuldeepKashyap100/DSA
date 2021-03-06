@@ -8,4 +8,4 @@ function towerOfHanoi(n, fromPeg, toPeg, auxPeg) {
     towerOfHanoi(n-1, auxPeg, toPeg, fromPeg);
 }
 
-towerOfHanoi(2, 'a', 'c', 'b');
+towerOfHanoi(3, 'a', 'c', 'b');

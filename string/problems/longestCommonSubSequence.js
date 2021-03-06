@@ -32,17 +32,20 @@ const longestCommonSubsequenceDynamicProg = (a, b) => {
 
     let matchedSequence = "";
     let i = a.length, j = b.length;
+    let i = a.length, j = a.length, subSeq = "";
     while(i > 0 && j > 0) {
-        if(matchTable[i][j] === matchTable[i - 1][j]) {
-            i--;
-        }
-        else if(matchTable[i][j] === matchTable[i][j - 1]) {
-            j--;
-        }
-        else if(matchTable[i][j] === matchTable[i - 1][j - 1] + 1) {
-            matchedSequence += b[j - 1];
+        if(a[i - 1] === b[j - 1]) {
+            matchedSequence = a[i - 1] + matchedSequence;
             i--;
             j--;
+        }
+        else {
+            if(table[i - 1][j] > table[i][j - 1]) {
+                i--;
+            }
+            else {
+                j--;
+            }
         }
     }
     console.log(matchTable);

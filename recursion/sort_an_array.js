@@ -1,5 +1,5 @@
 const sort = (inputArr, endIndex) => {
-    if(inputArr.length === 0)
+    if(inputArr.length === 1)
         return;
     const lastElement = inputArr.pop();
     sort(inputArr, endIndex-1);
@@ -15,6 +15,25 @@ const insert = (inputArr, element) => {
     insert(inputArr, element);
     inputArr.push(lastElement); // induction step of insert
 }
+
+// without modifying array
+// const sort = (array, n) => {
+//     if(n === 1) return;
+//     const lastElement = array[n - 1];
+//     sort(array, n - 1);
+//     insert(array, n - 1, lastElement);
+// }
+
+// const insert = (array, n, element) => {
+//     if(n === 0 || element >= array[n - 1]) {
+//         array[n] = element;
+//         return;
+//     }
+
+//     const lastElement = array[n - 1];
+//     insert(array, n - 1, element);
+//     array[n - 1] = lastElement;
+// }
 
 let array = [5,2,3,8,1,4];
 sort(array, array.length-1);

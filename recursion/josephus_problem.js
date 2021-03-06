@@ -7,4 +7,4 @@ const getLastManAlive = (persons, startIndex,k) => {
     return getLastManAlive(persons, toBeKilled, k);
 }
 
-console.log(getLastManAlive(new Array(7).fill().map((_,i)=>++i), 0,3));
+console.log(getLastManAlive(new Array(8).fill().map((_,i)=>++i), 0,3));
