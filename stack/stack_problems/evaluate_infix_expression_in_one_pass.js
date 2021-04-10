@@ -1,4 +1,4 @@
-const Stack = require("../stack/Stack").LinkedListStack;
+const Stack = require("../Stack").LinkedListStack;
 
 
 const operators = ['+', '-', '/', '%', "*"];

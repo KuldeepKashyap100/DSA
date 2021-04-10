@@ -1,4 +1,4 @@
-const Stack = require("../stack/Stack").LinkedListStack;
+const Stack = require("../Stack").LinkedListStack;
 
 // find consecutive smaller or equal values before it.
 
@@ -45,6 +45,8 @@ const Stack = require("../stack/Stack").LinkedListStack;
 
 
 // easily understandable written by self
+// find nearest greater to left(index) of every element
+// and then subtract the current index from it to get sum consecutive elements
 const findSpans = (array) => {
     const stack = new Stack();
     const span = [];
@@ -70,7 +72,7 @@ const findSpans = (array) => {
 }
 
 
-// const spans = findSpans([6,3,4,5,2]);
-const spans = findSpans([100,80,60,70,60,75,85]);
+const spans = findSpans([6,3,4,5,2]);
+// const spans = findSpans([100,80,60,70,60,75,85]);
 
 console.log(spans);

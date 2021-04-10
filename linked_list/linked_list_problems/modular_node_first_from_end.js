@@ -1,4 +1,4 @@
-const LinkedList = require("../linked_list/LinkedList");
+const LinkedList = require("../LinkedList");
 
 // [time -> o(n)] and [space -> o(1)]
 const findModularNode = (list, k) => {

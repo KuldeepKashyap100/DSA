@@ -31,9 +31,10 @@ class UnrolledLinkedList {
         let targetNode = blockContaingNode.head;
         // Search the position in the block
         position = position % this.blockSize;
-        if(position === 0) position = this.blockSize;
-
-        position = this.head.nodeCount + 1 - position;
+        if(position === 0) 
+            position = this.blockSize;
+        else
+            position = this.head.nodeCount + 1 - position;
         while(position--) {
             targetNode = targetNode.next;
         }
@@ -78,17 +79,17 @@ class UnrolledLinkedList {
         if(position === 1) {
             const nextBlock = this.head.next;
             this.head.next = newNode;
-            this.head.next.next = nextBlock;
-            this.head.head = this.head.next;
+            newNode.next = nextBlock;
+            this.head.head = newNode;
             this.head.nodeCount++;
             this.shift(this.head);
             return;
         }
         const [searchedBlock, searchedElement] = this.searchElement(position);
         let temp = searchedElement;
-        while(temp.next != searchedElement) 
+        while(temp.next !== searchedElement) 
             temp = temp.next;
-        temp.next =newNode;
+        temp.next = newNode;
         newNode.next = searchedElement;
         this.shift(searchedBlock);
     }

@@ -1,4 +1,4 @@
-const LinkedList = require("../linked_list/LinkedList");
+const LinkedList = require("../LinkedList");
 
 
 // using hashmap [time -> o(n)] and [space -> o(n)]

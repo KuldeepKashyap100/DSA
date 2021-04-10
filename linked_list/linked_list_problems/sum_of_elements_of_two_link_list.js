@@ -1,4 +1,4 @@
-const LinkedList = require("../linked_list/LinkedList");
+const LinkedList = require("../LinkedList");
 
 const addListNumbersWrapper = (first, second) => {
     let resultList = new LinkedList();
