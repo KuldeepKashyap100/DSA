@@ -13,8 +13,10 @@ const countSubsetSum = (items, sum) => {
 } 
 // Recursive
 function countSubsetSumUtil(items, sum, totalItemsAvailable) {
+    // if sum is zero then we have one subset which is equal to sum and that subset is null subset {}
     if(!sum) return 1;
-    if(!totalItemsAvailable) return 0;
+    // if we don't have any elements in set then it is not possible to reach the sum
+    if(sum && !totalItemsAvailable) return 0;
 
     const currentItem = items[totalItemsAvailable - 1];
     if(sum >= currentItem) {
@@ -47,7 +49,10 @@ function countSubsetSumMemoization(items, sum, totalItemsAvailable, table) {
 
 // bottom up approach
 function countSubsetSumBottomUp(items, sum) {
+    // if we don't have any elements in set then it is not possible to reach the sum
     const table = new Array(items.length + 1).fill().map(_ => new Array(sum + 1).fill(0));
+
+    // if sum is zero then we have one subset which is equal to sum and that subset is null subset {}
     for(let i = 0; i < items.length + 1; i++) table[i][0] = 1;
     
     for(let i = 1; i <= items.length; i++) {

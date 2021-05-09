@@ -1,6 +1,7 @@
 /**
  * Given a unboundedKnapsack weight W and a set of n items with certain value vali and weight wti, 
- * we need to calculate the maximum amount that could make up this quantity exactly. This is different from classical unboundedKnapsack problem, 
+ * we need to calculate the maximum amount that could make up this quantity exactly. 
+ * This is different from classical unboundedKnapsack problem, 
  * here we are allowed to use unlimited number of instances of an item.
  */
 const unboundedKnapsack = (values, weights, capacity) => {
@@ -19,6 +20,8 @@ function unboundedKnapsackUtil(values, weights, capacity, totalItemsAvailable) {
     const currentValue = values[totalItemsAvailable - 1];
 
     if(currentWeight <= capacity) {
+        // even if we included the item it not yet processed completely (unlike o/1 knapsack),
+        // beacuse we have multiple instances of same item that's why can select it again
         const included = unboundedKnapsackUtil(values, weights, capacity - currentWeight, totalItemsAvailable);
         const notIncluded = unboundedKnapsackUtil(values, weights, capacity, totalItemsAvailable - 1);
 
@@ -57,7 +60,7 @@ const unboundedKnapsackBottomUpApproach = (values, weights, capacity) => {
             const currentWeight = weights[i - 1];
             const currentValue = values[i - 1];
 
-            if(j >= weights[i - 1]) {
+            if(j >= currentWeight) {
                 const itemIncluded = currentValue + table[i][j - currentWeight];
                 const itemExcluded = table[i - 1][j];
                 table[i][j] = Math.max(itemIncluded, itemExcluded);

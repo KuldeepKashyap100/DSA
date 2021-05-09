@@ -26,8 +26,8 @@ const fillNextSibling = (root) => {
         if(root.nextSibling) {
             if(root.nextSibling.left)
                 root.right.nextSibling = root.nextSibling.left;
-            else if(root.nextSibling.left)
-                root.right.nextSibling = root.nextSibling.left;
+            else if(root.nextSibling.right)
+                root.right.nextSibling = root.nextSibling.right;
             else
                 root.right.nextSibling = null;
         }

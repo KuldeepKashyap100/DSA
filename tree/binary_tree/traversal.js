@@ -87,30 +87,34 @@ const postOrderTraversalNonRecursive = (root) => {
 } 
 
 // post order nonrecursive using 1 stacks not working
+// https://www.youtube.com/watch?v=xLQKdq0Ffjg
 const postOrderNonRecursive = (root) => {
     const stack = [];
     let current = root;
     while(stack.length || current) { 
+        // process left subtree
         if(current) {
             stack.push(current);
             current = current.left;
+            continue;
         }
-        else {
-            let top = stack[stack.length - 1];
-            // if leaf node
-            if(!top.right) {
-                top = stack.pop();
-                console.log(top.data);
 
-                while(stack.length && top === stack[stack.length-1].right) {
-                    top = stack.pop();
-                    console.log(top.data);
-                }
-            }
-            // go to right sub tree
-            else {
-                current = top.right;
-            }
+        // process right subtree
+        let top = stack[stack.length - 1];
+        if(top.right) {
+            current = top.right;
+            continue;
+        }
+
+        let poppedElement = stack.pop();
+        console.log(poppedElement.data);
+        top = stack[stack.length - 1];
+
+        // if popped value is right node then we can process the parent as well
+        while(stack.length && poppedElement === top.right) {
+            poppedElement = stack.pop();
+            top = stack[stack.length - 1];
+            console.log(poppedElement.data);
         }
     }
 }
@@ -143,5 +147,5 @@ root.left.right = new Node(5);
 root.right.left = new Node(6);
 root.right.right = new Node(7);
 
-preOrderTraversal(root);
-preOrderTraversalNonRecursive(root);
+postOrderTraversal(root);
+postOrderTraversalNonRecursive(root);

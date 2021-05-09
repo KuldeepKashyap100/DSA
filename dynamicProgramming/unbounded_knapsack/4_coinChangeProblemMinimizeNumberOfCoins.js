@@ -1,6 +1,12 @@
 /**
  * Find minimum number of coins required to make the sum.
+ * (minimize the number of coins)
+ * unique question - https://www.youtube.com/watch?v=I-l6PBeERuc&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=16
  */
+
+const coinChageRecursive = (coins, sum) => {
+
+}
 const coinChangeProblem = (coins, sum) => {
     const table = new Array(coins.length + 1).fill().map(_ => new Array(sum + 1).fill(0));
     for(let i = 0; i <= sum; i++) table[0][i] = Infinity;

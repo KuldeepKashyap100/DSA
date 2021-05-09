@@ -2,10 +2,13 @@
  * Find number of subsets which satisfies s1 - s2 = givenDiff,
  * where s1 and s2 is sum of all number in subset.
  * 
+ * ans.
  * now we know s1 + s2 = sigma(arr[i])
  * adding both eq.
  * 2s1 = sigma(arr[i]) + givenDiff;
  * s1 = (sigma(arr[i]) + givenDiff) / 2;
+ * 
+ * now the task is to only find s1.
  * 
  * using the above formula we have to only find s1
  */

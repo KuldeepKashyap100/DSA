@@ -3,6 +3,9 @@
  * that contains prices of all pieces of size smaller than n. 
  * Determine the maximum value obtainable by cutting up the rod 
  * and selling the pieces. 
+ * ex -> length = [1, 2, 3, 4, 5, 6, 7, 8]
+ *       prices = [1, 5, 8, 9, 10, 17, 17, 20]
+ * for 2 inch rod price is 5.
  * 
  * if rod lengths are not sequential pass the length array and use this array,
  * instead of using constant length variable.
@@ -25,7 +28,8 @@ const rodCuttingProblem = (prices, rodLength) => {
                 table[i][j] = Math.max(itemIncluded, itemExcluded);
                 continue;
             }
-            table[i][j] = table[i - 1][toMakeRodLength];
+            const itemExcluded = table[i - 1][toMakeRodLength];
+            table[i][j] = itemExcluded;
         }
     }
 

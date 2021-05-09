@@ -49,7 +49,7 @@ const lcsBottomUp = (a, b) => {
         }
     }
 
-    let i = a.length, j = a.length, subSeq = "";
+    let i = a.length, j = b.length, subSeq = "";
     while(i > 0 && j > 0) {
         if(a[i - 1] === b[j - 1]) {
             subSeq = a[i - 1] + subSeq;

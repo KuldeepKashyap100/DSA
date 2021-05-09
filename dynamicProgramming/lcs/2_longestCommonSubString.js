@@ -50,12 +50,11 @@ const lcsBottomUp = (a, b) => {
             }
         }
     }
-    console.log(result, table);
-
+    console.log(result);
 }
 
 let a = "abcdefghijklmno";
 let b = "abdsefg";
-a = "abc";
-b = "abzc";
+// a = "abc";
+// b = "abzc";
 longestCommonSubstring(a, b);

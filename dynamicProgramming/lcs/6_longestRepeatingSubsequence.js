@@ -1,4 +1,7 @@
 /**
+ * Quest. find that subsequence must be present 2 times. and should be longest.
+ * 
+ * Ans.
  * Given a string, find the length of the longest 
  * repeating subsequence such that the two subsequences 
  * don’t have same string character at the same position, 

@@ -1,3 +1,4 @@
+// https://www.youtube.com/watch?v=13m9ZCB8gjw
 const leastCommonAncestor = (root, first, second) => {
     if(!root)
         return;

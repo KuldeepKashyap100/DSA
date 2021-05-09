@@ -18,16 +18,20 @@ const subsetSum = (items, sum) => {
 }
 // Recursive approach
 function subsetSumUtil(items, sum, totalItemsAvailable) {
+    // if sum becomes zero then we have found one candidate for the result
     if(!sum) return true;
+    // if sum is not zero but items available becomes zero then their is not item to include to reach the sum
     if(sum && !totalItemsAvailable) return false;
 
     const currentItem = items[totalItemsAvailable - 1];
+    // if sum is greater than current item then we have a choice wheather we can include it or exclude it
     if(sum >= currentItem) {
         const itemIncluded = subsetSumUtil(items, sum - currentItem, totalItemsAvailable - 1);
         const itemExcluded = subsetSumUtil(items, sum, totalItemsAvailable - 1);
 
         return itemIncluded || itemExcluded;
     }
+    // else we exclude it
     const itemExcluded = subsetSumUtil(items, sum, totalItemsAvailable - 1);
     return itemExcluded;
 }
@@ -53,7 +57,10 @@ function subsetSumMemoized(items, sum, totalItemsAvailable, table) {
 function subsetSumBottomUp(items, sum) {
     const table = new Array(items.length + 1).fill().map(_ => new Array(sum + 1).fill(0));
     // base condition
+    // if we don't have any elements in set then it is not possible to reach the sum
     for(let i = 1; i <= sum; i++) table[0][i] = false;
+
+    // if sum is zero then we have one subset which is equal to sum and that subset is null subset {}
     for(let i = 0; i <= items.length; i++) table[i][0] = true;
 
     for(let i = 1; i <= items.length; i++) {

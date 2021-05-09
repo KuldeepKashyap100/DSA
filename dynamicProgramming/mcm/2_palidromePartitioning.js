@@ -1,9 +1,11 @@
 /**
- * Given a string, a partitioning of the string is a palindrome partitioning 
- * if every substring of the partition is a palindrome.
+ * Given a string, Find the minimum number of partitions required to
+ * such that every partition is palindrome.
+ * 
  * For example, “aba|b|bbabb|a|b|aba” is a palindrome partitioning of “ababbbabbababa”. 
  * Determine the fewest cuts needed for a palindrome partitioning of a given string. 
  * For example, minimum of 3 cuts are needed for “ababbbabbababa”. The three cuts are “a|babbbab|b|ababa”. 
+ * 
  * If a string is a palindrome, then minimum 0 cuts are needed. 
  * If a string of length n containing all different characters, 
  * then minimum n-1 cuts are needed. 
@@ -19,7 +21,10 @@ const palindromePartitioning = (str) => {
 }
 
 const palindromePartitioningRecursive = (str, startIdx, endIdx) => {
+    // if string length is one then zero partition required
     if(startIdx >= endIdx) return 0;
+
+    // if string is already a palindrome then zero partition required
     if(checkPalindrome(str, startIdx, endIdx)) return 0;
 
     let minCuts = Infinity;
@@ -64,10 +69,35 @@ const palindromePartitioningMemoized = (str, startIdx, endIdx, table) => {
 }
 
 
+// not working need to modify it
+const palindromePartitioningBottomUp = (str) => {
+    const table = new Array(str.length).fill().map(_ => Array(str.length).fill(-1));
+    
+    // when the str length is one number of partitions required is 0
+    for(let i = 0; i < str.length; i++) table[i][i] = 0;
+
+    for(let palindromeLength = 2; palindromeLength < str.length; palindromeLength++) {
+        for(let startIdx = 0; startIdx < str.length - palindromeLength + 1; startIdx++) {
+            const endIdx = startIdx + (palindromeLength - 1);
+
+            table[startIdx][endIdx] = Infinity;
+            for(let k = startIdx; k < endIdx; k++) {
+                const leftPartition = checkPalindrome(str, startIdx, k) ? 0: table[startIdx][k];
+                const rightPartition = checkPalindrome(str, k+1, endIdx) ? 0: table[k+ 1][endIdx];
+
+                const cost = leftPartition + rightPartition+ 1;
+                table[startIdx][endIdx] = Math.min(table[startIdx][endIdx], cost);
+            }
+        }
+    }
+    console.log(table);
+}
+
 let str = "nitin";
 str = "ababbbabbababa";
 str = "geek";
 // str = "aaaa";
 // str = "abcde";
 // str = "abbac";
-palindromePartitioning(str);
+// palindromePartitioning(str);
+palindromePartitioningBottomUp(str);

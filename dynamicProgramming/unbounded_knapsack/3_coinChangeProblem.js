@@ -1,7 +1,18 @@
 /**
  * Given a value N, if we want to make change for N cents, 
  * and we have infinite supply of each of S = { S1, S2, .. , Sm} valued coins, 
+ * ex -> coins = [1, 2, 3]
+ *        sum = 5
+ * ways ={
+ *  [1, 1, 1, 1, 1],
+ *  [2, 2, 1]
+ *  [3, 2],
+ *  [3, 1, 1],
+ *  [1, 1, 1, 2]
+ * }
  * how many ways can we make the change? The order of coins doesn’t matter.
+ * 
+ * It is similar to countSubsetSum but for unbounded knapsack.
  */
 
 const coinChangeProblem = (coins, sum) => {
