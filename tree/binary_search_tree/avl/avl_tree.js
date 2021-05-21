@@ -65,7 +65,6 @@ class AVL {
                 else 
                     root = this.doubleRotateWithRight(root);
             }
-
         }
         root.height = Math.max(this.height(root.left), this.height(root.right)) + 1;
         this.root = root;
