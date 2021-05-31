@@ -67,19 +67,10 @@
 
 
 
-// Promise.resolve().then(_ => console.log("kk")).then(_ => console.log("hh"));
-// new Promise((resolve, reject) => {
-//     resolve(3);
-//     resolve(4);
-// reject(4)
-// }).then(_ => console.log(_)).catch(_=> console.log(_));
-
-
-
-const findNonOverlappingIntervals = () => {
-    let intervals = [ [2, 6], [1, 3], [8, 10], [15, 18]];
-    const stack = [];
-    for(const temp = )
-
+if(true) {
+    module.exports = new Array(15);
 }
-findNonOverlappingIntervals();
+
+if(true) {
+    module.exports = new Object();
+}

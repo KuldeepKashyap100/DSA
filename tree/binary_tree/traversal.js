@@ -86,7 +86,6 @@ const postOrderTraversalNonRecursive = (root) => {
     }
 } 
 
-// post order nonrecursive using 1 stacks not working
 // https://www.youtube.com/watch?v=xLQKdq0Ffjg
 const postOrderNonRecursive = (root) => {
     const stack = [];

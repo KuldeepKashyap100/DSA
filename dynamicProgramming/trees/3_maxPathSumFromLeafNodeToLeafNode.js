@@ -6,7 +6,7 @@ const maxPathSum = (root, res) => {
     const rightSum = maxPathSum(root.right, res);
 
     const currentMax = root.data + Math.max(leftSum, rightSum);
-    res.maxPathSum = Math.max(res.maxPathSum, currentMax,root.data + leftSum + rightSum);
+    res.maxPathSum = Math.max(res.maxPathSum, currentMax, root.data + leftSum + rightSum);
 
     return currentMax;
 }

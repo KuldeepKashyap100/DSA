@@ -1,4 +1,5 @@
 
+// b/w two leaf nodes and have max nodes in path
 const getHeight = (root, res) => {
     if(!root) return 0;
 
