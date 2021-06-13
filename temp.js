@@ -66,11 +66,170 @@
 // readmeGenerator.printProperties();
 
 
+// class MaxHeap {
+//     constructor(array = []) {
+//         this.array = array;
+//         this.length = this.array.length;
+//     }
+//     getParentIdx(childIdx) {
+//         if(childIdx <= 0 || childIdx >= this.length) return -1;
+//         return Math.floor((childIdx - 1) / 2);
+//     }
+//     getLeftChildIdx(parentIdx) {
+//         const childIdx = 2 * parentIdx + 1;
+//         if(childIdx > this.length - 1) return -1;
+//         return childIdx; 
+//     }
+//     getRightChildIdx(parentIdx) {
+//         const childIdx= 2 * parentIdx + 2;
+//         if(childIdx > this.length - 1) return -1;
+//         return childIdx;
+//     }
+//     insert(data) {
+//         this.length++;
+        
+//         let insertIndex = this.length - 1;
+//         while(insertIndex >=0 && this.array[this.getParentIdx(insertIndex)] < data) {
+//             this.array[insertIndex] = this.array[this.getParentIdx(insertIndex)];
+//             insertIndex = this.getParentIdx(insertIndex);
+//         }
+//         this.array[insertIndex] = data;
+//     }
+//     delete() {
+//         const elementtToDelete = this.array[0];
+//         this.array[0] = this.array[this.length - 1];
+//         this.length--;
+//         this.percolateDown(0);
+//         return elementtToDelete;
+//     }
+//     percolateDown(parentIdx) {
+//         const leftChildIdx = this.getLeftChildIdx(parentIdx);
+//         const rightChildIdx = this.getRightChildIdx(parentIdx);
 
-if(true) {
-    module.exports = new Array(15);
+//         let maxIdx = parentIdx;
+//         if(this.array[maxIdx] < this.array[leftChildIdx]) {
+//             maxIdx = leftChildIdx;
+//         }
+//         if(this.array[maxIdx] < this.array[rightChildIdx]) {
+//             maxIdx = rightChildIdx;
+//         }
+
+//         if(maxIdx !== parentIdx) {
+//             [this.array[maxIdx], this.array[parentIdx]] = [this.array[parentIdx], this.array[maxIdx]];
+//             this.percolateDown(maxIdx);
+//         }
+//     }
+//     display() {
+//         console.log(this.array.slice(0, this.length));
+//     }
+//     buildHeap() {
+//         for(let i = this.length - 1; i >= 0; i--) {
+//             this.percolateDown(i);
+//         }
+//     }
+//     heapSort() {
+//         this.buildHeap();
+//         for(let i = this.length - 1; i >= 0; i--) {
+//             [this.array[0], this.array[i]] = [this.array[i], this.array[0]];
+//             this.length--;
+//             this.percolateDown(0);
+//         }
+//         this.length = this.array.length;
+//     }
+// }
+
+// const maxHeap = new MaxHeap([24, 4, 35, 6, -66, 3]);
+// // maxHeap.insert(2);
+// // maxHeap.insert(4);
+// // maxHeap.insert(3);
+// // maxHeap.insert(6);
+// maxHeap.heapSort();
+// // maxHeap.buildHeap();
+
+// maxHeap.display();
+
+
+
+function perfectSubstring(s, k) {
+    let left = 0, right = 0, map = {}, substrCount = 0;
+    while(right < s.length) {
+        const currentChar = s[right];
+        map[currentChar] = map[currentChar] ? ++map[currentChar] : 1;
+        if(map[currentChar] > k) {
+            while(map[currentChar] > k) {
+                const deleteChar = s[left];
+                map[deleteChar]--;
+                left++;
+            }
+        }
+
+        substrCount =  checkString(map, substrCount, k);
+        right++;
+    }
+    while(left < right) {
+        const currentChar = s[left];
+        map[currentChar] = map[currentChar] ? --map[currentChar] : 1;
+        substrCount =  checkString(map, substrCount, k);
+        left++;
+    }
+    console.log(substrCount);
 }
 
-if(true) {
-    module.exports = new Object();
+function checkString(map, substrCount, k) {
+    let found = true;
+    for(let charCount in map) {
+        if(map[charCount] !== k) {
+            found =false;
+            break;
+        }
+    }
+
+    if(found) {
+        substrCount++;
+    }
+    return substrCount;
 }
+
+function perfectSubstring(s, k) {
+    let map = {}, substrCount = 0;
+    for(let i = 0; i < s.length; i++) {
+        const substr = s.slice(0, i + 1);
+        const map = {};
+        for(let j = 0; j < substr.length; j++) {
+            const currentChar = substr[j];
+            map[currentChar] = map[currentChar] ? ++map[currentChar] : 1;
+        }
+        substrCount = checkString(map, substrCount, k);
+    }
+    let left = 0, right = s.length;
+    while(left < right) {
+        const substr = s.slice(left, right);
+        const map = {};
+        for(let j = 0; j < substr.length; j++) {
+            const currentChar = substr[j];
+            map[currentChar] = map[currentChar] ? ++map[currentChar] : 1;
+        }
+        substrCount = checkString(map, substrCount, k);
+        left++;
+    }
+    console.log(substrCount);
+}
+
+
+function checkString(map, substrCount, k) {
+    let found = true;
+    for(let charCount in map) {
+        if(map[charCount] !== k) {
+            found =false;
+            break;
+        }
+    }
+
+    if(found) {
+        console.log(map)
+        substrCount++;
+    }
+    return substrCount;
+}
+
+perfectSubstring("1102021222", 2);

@@ -4,21 +4,21 @@ class MaxHeap {
         this.length = this.array.length;
         // this.capacity = capacity;
     }
-    getParent(childIndex) {
+    getParentIdx(childIndex) {
         if(childIndex <= 0 || childIndex >= this.length)
-            return null;
+            return -1;
         return Math.floor((childIndex-1)/2);
     }
-    getLeftChild(parentIndex) {
+    getLeftChildIdx(parentIndex) {
         const leftChildIndex = Math.floor(2*parentIndex + 1);
         if(leftChildIndex >= this.length)
-            return null;
+            return -1;
         return leftChildIndex;
     }
-    getRightChild(parentIndex) {
+    getRightChildIdx(parentIndex) {
         const rightChildIndex = Math.floor(2*parentIndex + 2);
         if(rightChildIndex >= this.length)
-            return null;
+            return -1;
         return rightChildIndex;
     }
     getMaximumElement() {
@@ -26,12 +26,12 @@ class MaxHeap {
     }
     // o(logn)
     percolateDown(index) {
-        const leftChild = this.getLeftChild(index);
-        const rightChild = this.getRightChild(index);
+        const leftChild = this.getLeftChildIdx(index);
+        const rightChild = this.getRightChildIdx(index);
         
         // find max children
         let maxIndex = index;
-        if(leftChild && this.array[index] < this.array[leftChild]) 
+        if(leftChild && this.array[maxIndex] < this.array[leftChild]) 
             maxIndex = leftChild;
 
         if(rightChild && this.array[maxIndex] < this.array[rightChild])
@@ -62,12 +62,12 @@ class MaxHeap {
     // percolate up
     insert(data) {
         // increase heap size
-        this.length++
+        this.length++;
         let insertedIndex = this.length - 1;
         // find appropriate location
-        while(insertedIndex >= 0 && this.array[this.getParent(insertedIndex)] < data) {
-            this.array[insertedIndex] = this.array[this.getParent(insertedIndex)];
-            insertedIndex = this.getParent(insertedIndex);
+        while(insertedIndex >= 0 && this.array[this.Idx(insertedIndex)] < data) {
+            this.array[insertedIndex] = this.array[this.getParentIdx(insertedIndex)];
+            insertedIndex = this.getParentIdx(insertedIndex);
         }
         // insert data
         this.array[insertedIndex] = data;
@@ -78,8 +78,53 @@ class MaxHeap {
         }
         this.length = 0;
     }
+    // time -> O(n) surprising
+    /**
+     * https://stackoverflow.com/questions/9755721/how-can-building-a-heap-be-on-time-complexity
+     * 
+     * two options Available siftdown and siftup
+     * Which implementation for buildHeap is more efficient?
+     * Both of these solutions will produce a valid heap. Unsurprisingly, the more efficient one is the second operation that uses siftDown.
+     * 
+     * Let h = log n represent the height of the heap. 
+     * The work required for the siftDown approach is given by the sum
+     * (0 * n/2) + (1 * n/4) + (2 * n/8) + ... + (h * 1).
+     * 
+     * Each term in the sum has the maximum distance a node at the given height will have to move (zero for the bottom layer, h for the root) multiplied by the number of nodes at that height. 
+     * In contrast, the sum for calling siftUp on each node is
+     * (h * n/2) + ((h-1) * n/4) + ((h-2)*n/8) + ... + (0 * 1).
+     * 
+     * It should be clear that the second sum is larger. 
+     * The first term alone is hn/2 = 1/2 n log n,
+     * so this approach has complexity at best O(n log n).
+     * 
+     * 
+     * another explaination -
+     * Intuitively:
+     * "The complexity should be O(nLog n)... for each item we "heapify", 
+     * it has the potential to have to filter down 
+     * once for each level for the heap so far (which is log n levels)."
+     * 
+     * Not quite. 
+     * Your logic does not produce a tight bound -- 
+     * it over estimates the complexity of each heapify. 
+     * If built from the bottom up, insertion (heapify) 
+     * can be much less than O(log(n)). The process is as follows:
+     * ( Step 1 ) The first n/2 elements go on the bottom row of the heap. 
+     *              h=0, so heapify is not needed.
+     * ( Step 2 ) The next n/22 elements go on the row 1 up from the bottom. h=1, 
+     *              heapify filters 1 level down.
+     * ( Step i ) The next n/2i elements go in row i up from the bottom.
+     *              h=i, heapify filters i levels down.
+     * ( Step log(n) ) The last n/2log2(n) = 1 element goes in row log(n) up from the bottom. 
+     *              h=log(n), heapify filters log(n) levels down.
+     * NOTICE: that after step one, 1/2 of the elements (n/2) are already in the heap, 
+     * and we didn't even need to call heapify once. 
+     * Also, notice that only a single element, 
+     * the root, actually incurs the full log(n) complexity.
+     */
     buildHeap() {
-        const lastElementParentIndex = this.getParent(this.length - 1);
+        const lastElementParentIndex = this.getParentIdx(this.length - 1);
         // start with the parent of last element we can ignore all the leaf nodes
         for(let i = lastElementParentIndex; i>=0; i--)
             this.percolateDown(i);
@@ -87,7 +132,21 @@ class MaxHeap {
         return this.array;
     }
 
-    // time -> o(nlogn)
+    // time -> o(nlogn) why
+    /**
+     * Why does heap sort require O(n log n) time?
+     * If it is possible to run buildHeap in linear time, 
+     * why does heap sort require O(n log n) time? 
+     * Well, heap sort consists of two stages. First, 
+     * we call buildHeap on the array, which requires O(n) time if implemented optimally. 
+     * 
+     * Notice that, in contrast to buildHeap where for most of the nodes 
+     * we are calling siftDown from the bottom of the tree, 
+     * we are now calling siftDown from the top of the tree 
+     * on each iteration! Although the tree is shrinking, 
+     * it doesn't shrink fast enough: The height of the tree 
+     * stays constant until you have removed the first half of the nodes 
+     */
     heapSort() {
         this.buildHeap();
         // we are going to exclue greatest element as the go to back of the array by decrementing the length
@@ -99,6 +158,9 @@ class MaxHeap {
             this.percolateDown(0);
         }
         this.length = storedlength;
+    }
+    display() {
+        console.log(this.array.slice(0, this.length));
     }
 }
 
