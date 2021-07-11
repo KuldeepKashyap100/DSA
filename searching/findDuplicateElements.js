@@ -49,11 +49,11 @@ const findDuplicateElementsLinearImprovedSpace = (input) => {
     }
 }
 
-let input = [3,5,2,4,6,1,2];
-findDuplicateElementsPolynomial(input);
-findDuplicateElementsLinearLogarithmic(input);
-findDuplicateElementsLinear(input);
-input = [3,2,5,4,6,1,2]
+let c = [3,5,2,4,6,1,2];
+// findDuplicateElementsPolynomial(input);
+// findDuplicateElementsLinearLogarithmic(input);
+// findDuplicateElementsLinear(input);
+input = [3,2,0,4,6,1,0]
 findDuplicateElementsLinearImprovedSpace(input);
 
 

@@ -4,7 +4,7 @@
  * space -> O(N)
  */
 const mergeSort = (input, left, right) => {
-    if(left >= right) 
+    if(left > right) 
         return;
     const mid = Math.floor((left + right) / 2);
     // sort recursively

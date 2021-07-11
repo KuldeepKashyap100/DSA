@@ -10,6 +10,7 @@ const findNumberOfTimesSortedArrayRotated = (arr) => {
             return;
         }
         const mid = Math.floor(start + (end - start) / 2);
+        // beacuse array is rotated
         const prev = (mid + 1) % arr.length;
         const next = (mid - 1 + arr.length) % arr.length;
 
@@ -18,11 +19,11 @@ const findNumberOfTimesSortedArrayRotated = (arr) => {
             return;
         }
         else if(arr[start] <= arr[mid]) {
-            // unsorted array in first half
+            // unsorted array in second half
             start = mid + 1;
         }
         else if(arr[mid] <= arr[end]) {
-            // unsorted array in second half
+            // unsorted array in first half
             end = mid - 1;
         }
     }

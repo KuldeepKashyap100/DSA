@@ -1,6 +1,28 @@
 const Graph = require("../Graph").GraphAdjacencyList;
 const DisjointSet =  require("../../disjointSets/disjointSets");
 
+const detectCyleUsingDfs = (graph, startVertex) => {
+    vertexVisited[startVertex] = true;
+    const fromVertex = graph.adjacencyList[startVertex];
+    let toVertex = fromVertex.next;
+    let isCycle = false;
+    while (toVertex !== fromVertex) {
+        // avoid going back to parent from which we came
+        if(parent[fromVertex.data] !== toVertex.data) {
+            // If we are visiting node for the second time then there must be a cycle.
+            if(vertexVisited[toVertex.data]) {
+                return true;
+            }
+            else {
+                parent[toVertex.data] = fromVertex.data;
+                isCycle = isCycle || detectCyleUsingDfs(graph, toVertex.data);
+            }
+        }
+        toVertex = toVertex.next;
+    }
+    return isCycle;
+}
+
 
 /**
  * By using disjoint sets
@@ -28,28 +50,6 @@ const detectCycleUsingDisjointSet = (graph, startVertex) => {
     return false;
 }
 
-
-const detectCyleUAG = (graph, startVertex) => {
-    vertexVisited[startVertex] = true;
-    const fromVertex = graph.adjacencyList[startVertex];
-    let toVertex = fromVertex.next;
-    let isCycle = false;
-    while (toVertex !== fromVertex) {
-        // avoid going back to parent from which we came
-        if(parent[fromVertex.data] !== toVertex.data) {
-            // If we are visiting node for the second time then there must be a cycle.
-            if(vertexVisited[toVertex.data]) {
-                return true;
-            }
-            else {
-                parent[toVertex.data] = fromVertex.data;
-                isCycle = isCycle || detectCyleUAG(graph, toVertex.data);
-            }
-        }
-        toVertex = toVertex.next;
-    }
-    return isCycle;
-}
 
 
 // failure case in DAG

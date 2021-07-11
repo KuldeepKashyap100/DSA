@@ -39,7 +39,7 @@ const findDepthInDag = (graph) => {
         let toVertex = fromVertex.next;
         while(toVertex !== fromVertex) {
             if(--inDegree[toVertex.data] === 0)
-                queue.push(toVertex);
+                queue.push(graph.adjacencyList[toVertex.data]);
             toVertex = toVertex.next;
         }
     }

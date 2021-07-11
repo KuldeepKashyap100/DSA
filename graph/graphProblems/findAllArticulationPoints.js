@@ -6,6 +6,7 @@ const Graph = require("../Graph").GraphAdjacencyMatrix;
  * Following are steps of simple approach for connected graph.
  * time ->  O(V*(V+E))
  * tarjan's algorithm
+ * https://www.youtube.com/watch?v=2kREIkF9UAs
  */
 // time -> O(V + E) because we are using dfs
 const findCutVertices = (graph, fromVertex) => {

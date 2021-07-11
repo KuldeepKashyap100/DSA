@@ -5,7 +5,7 @@
  */
 const bubbleSort = (input) => {
     for(let pass = input.length - 1; pass >= 0; pass--) {
-        for(let i = 0; i < pass - 1; i++) {
+        for(let i = 0; i <= pass - 1; i++) {
             if(input[i] > input[i + 1])
                 [input[i], input[i + 1]] = [input[i + 1], input[i]]
         }
@@ -22,8 +22,8 @@ const bubbleSort = (input) => {
 const bubbleSortModified = (input) => {
     let swapped = true;
     for(let pass = input.length - 1; pass >= 0 && swapped; pass--) {
+        swapped = false;
         for(let i = 0; i < pass - 1; i++) {
-            swapped = false;
             if(input[i] > input[i + 1]) {
                 [input[i], input[i + 1]] = [input[i + 1], input[i]];
                 swapped = true;
@@ -33,7 +33,7 @@ const bubbleSortModified = (input) => {
 }
 
 const input = [64, 34, 25, 12, 22, 11, 90];
-bubbleSort(input);
+// bubbleSort(input);
 bubbleSortModified(input);
 
 console.log(input);
@@ -46,6 +46,6 @@ console.log(input);
  * $$$$
  * $$$$$
  * $$$$$$
- * It is skipping the already sorted elements in front of the array. so by default n^2 comparison was supposed to perform.
+ * It is skipping the already sorted elements in back of the array. so by default n^2 comparison was supposed to perform.
  * But due to skipping it is n^2/2 as you can see on the above diagram.
  */

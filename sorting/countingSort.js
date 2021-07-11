@@ -3,7 +3,7 @@
  * space -> O(N + K)
  * 
  * If max value is n^2 then size of count array is n^2. In that case space complexity rises drastically.
- * It cannot in work on negative values but we can normalize array to make it work. Find most -ve value and add it to entire array elements. 
+ * It cannot work on negative values but we can normalize array to make it work. Find most -ve value and add it to entire array elements. 
  * For floating point array we can use bucket sort.
  */
 const countingSort = (input, k) => {
@@ -26,8 +26,11 @@ const countingSort = (input, k) => {
     }
 
     // now sort the elements using count list
+    // reason for starting from back is to maintain stability of sorting algo.
     for(let i = input.length - 1; i >= 0; i--) {
-        sortedList[--count[input[i]]] = input[i];
+        const currentItem = input[i];
+        const newIdx = --count[currentItem];
+        sortedList[newIdx] = currentItem;
     }
     return sortedList;
 }

@@ -5,9 +5,9 @@ const Graph = require("./Graph").GraphAdjacencyList;
  * */
 const shortestPath = (graph, sourceVertex) => {
     const distance = Array.from({ length: graph.adjacencyList.length }, _ => -1);
-    const path = Array.from({ length: graph.adjacencyList.length }, _ => []);
+    const path = new Array(graph.adjacencyList.length);
     distance[sourceVertex] = 0;
-    path[sourceVertex].push(sourceVertex);
+    path[sourceVertex] = -1;
     const queue = [];
     queue.push(graph.adjacencyList[sourceVertex]);
     while(queue.length) {
@@ -19,8 +19,7 @@ const shortestPath = (graph, sourceVertex) => {
                 // each vertex enqueued only once
                 queue.push(graph.adjacencyList[toVertex.data]);
                 distance[toVertex.data] = distance[fromVertex.data] + 1;
-                path[fromVertex.data].forEach(vertex => path[toVertex.data].push(vertex));
-                path[toVertex.data].push(toVertex.data);
+                path[toVertex.data] = fromVertex.data;
             }
             toVertex = toVertex.next;
         }

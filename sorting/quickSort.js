@@ -25,7 +25,7 @@ const partition = (input, left, right) => {
     }
     [input[pivotPosition], input[right]] = [input[right], input[pivotPosition]];
     return right;
-}
+}x
 
 // const input = [10, 16, 8, 12, 15, 6, 3, 9, 5];
 const input = [1, 2, 3, 4, 5, 6, 7, 8];

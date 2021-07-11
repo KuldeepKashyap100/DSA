@@ -15,7 +15,7 @@ const findRightAngleTriangle = (input) => {
     }
 }
 
-// time -> O(n^2) | space -> (n)
+// time -> O(n^2) | space -> (n^2)
 const findRightAngleTriangleUsingHashing= (input) => {
     const hashMap = new Map();
     for(let i = 0; i < input.length; i++) {

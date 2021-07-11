@@ -150,86 +150,86 @@
 
 
 
-function perfectSubstring(s, k) {
-    let left = 0, right = 0, map = {}, substrCount = 0;
-    while(right < s.length) {
-        const currentChar = s[right];
-        map[currentChar] = map[currentChar] ? ++map[currentChar] : 1;
-        if(map[currentChar] > k) {
-            while(map[currentChar] > k) {
-                const deleteChar = s[left];
-                map[deleteChar]--;
-                left++;
-            }
-        }
+// function perfectSubstring(s, k) {
+//     let left = 0, right = 0, map = {}, substrCount = 0;
+//     while(right < s.length) {
+//         const currentChar = s[right];
+//         map[currentChar] = map[currentChar] ? ++map[currentChar] : 1;
+//         if(map[currentChar] > k) {
+//             while(map[currentChar] > k) {
+//                 const deleteChar = s[left];
+//                 map[deleteChar]--;
+//                 left++;
+//             }
+//         }
 
-        substrCount =  checkString(map, substrCount, k);
-        right++;
-    }
-    while(left < right) {
-        const currentChar = s[left];
-        map[currentChar] = map[currentChar] ? --map[currentChar] : 1;
-        substrCount =  checkString(map, substrCount, k);
-        left++;
-    }
-    console.log(substrCount);
-}
+//         substrCount =  checkString(map, substrCount, k);
+//         right++;
+//     }
+//     while(left < right) {
+//         const currentChar = s[left];
+//         map[currentChar] = map[currentChar] ? --map[currentChar] : 1;
+//         substrCount =  checkString(map, substrCount, k);
+//         left++;
+//     }
+//     console.log(substrCount);
+// }
 
-function checkString(map, substrCount, k) {
-    let found = true;
-    for(let charCount in map) {
-        if(map[charCount] !== k) {
-            found =false;
-            break;
-        }
-    }
+// function checkString(map, substrCount, k) {
+//     let found = true;
+//     for(let charCount in map) {
+//         if(map[charCount] !== k) {
+//             found =false;
+//             break;
+//         }
+//     }
 
-    if(found) {
-        substrCount++;
-    }
-    return substrCount;
-}
+//     if(found) {
+//         substrCount++;
+//     }
+//     return substrCount;
+// }
 
-function perfectSubstring(s, k) {
-    let map = {}, substrCount = 0;
-    for(let i = 0; i < s.length; i++) {
-        const substr = s.slice(0, i + 1);
-        const map = {};
-        for(let j = 0; j < substr.length; j++) {
-            const currentChar = substr[j];
-            map[currentChar] = map[currentChar] ? ++map[currentChar] : 1;
-        }
-        substrCount = checkString(map, substrCount, k);
-    }
-    let left = 0, right = s.length;
-    while(left < right) {
-        const substr = s.slice(left, right);
-        const map = {};
-        for(let j = 0; j < substr.length; j++) {
-            const currentChar = substr[j];
-            map[currentChar] = map[currentChar] ? ++map[currentChar] : 1;
-        }
-        substrCount = checkString(map, substrCount, k);
-        left++;
-    }
-    console.log(substrCount);
-}
+// function perfectSubstring(s, k) {
+//     let map = {}, substrCount = 0;
+//     for(let i = 0; i < s.length; i++) {
+//         const substr = s.slice(0, i + 1);
+//         const map = {};
+//         for(let j = 0; j < substr.length; j++) {
+//             const currentChar = substr[j];
+//             map[currentChar] = map[currentChar] ? ++map[currentChar] : 1;
+//         }
+//         substrCount = checkString(map, substrCount, k);
+//     }
+//     let left = 0, right = s.length;
+//     while(left < right) {
+//         const substr = s.slice(left, right);
+//         const map = {};
+//         for(let j = 0; j < substr.length; j++) {
+//             const currentChar = substr[j];
+//             map[currentChar] = map[currentChar] ? ++map[currentChar] : 1;
+//         }
+//         substrCount = checkString(map, substrCount, k);
+//         left++;
+//     }
+//     console.log(substrCount);
+// }
 
 
-function checkString(map, substrCount, k) {
-    let found = true;
-    for(let charCount in map) {
-        if(map[charCount] !== k) {
-            found =false;
-            break;
-        }
-    }
+// function checkString(map, substrCount, k) {
+//     let found = true;
+//     for(let charCount in map) {
+//         if(map[charCount] !== k) {
+//             found =false;
+//             break;
+//         }
+//     }
 
-    if(found) {
-        console.log(map)
-        substrCount++;
-    }
-    return substrCount;
-}
+//     if(found) {
+//         console.log(map)
+//         substrCount++;
+//     }
+//     return substrCount;
+// }
 
-perfectSubstring("1102021222", 2);
+// perfectSubstring("1102021222", 2);

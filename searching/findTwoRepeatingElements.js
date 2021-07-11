@@ -44,8 +44,10 @@ const findDuplicateElementsLinearImprovedSpace = (input) => {
 
 /**
  * Found Two great articles:-
+ * https://www.geeksforgeeks.org/why-are-negative-numbers-stored-as-2s-complement/
  * https://www.geeksforgeeks.org/find-the-two-repeating-elements-in-a-given-array/
  * https://www.geeksforgeeks.org/find-two-non-repeating-elements-in-an-array-of-repeating-elements/
+ * https://algorithms.tutorialhorizon.com/find-the-right-most-set-bit-of-a-number/
  * Using XOR approach, if the input elements are in the range [1, n], 
  * where length of input is 'size' and size = n + 2
  * time -> O(n) | space -> O(1)
@@ -66,23 +68,37 @@ const findDuplicateElementsXor = (input) => {
     }
 
     /**
-     * All the bits that are set in xor will be set in one non-repeating element (x or y) and not in others.
+     * All the bits that are set in xor will be set by either x or y but not both.
      * So if we take any set bit of xor and divide the elements of the array in two sets 
      * – one set of elements with same bit set and another set with same bit not set. 
      * By doing so, we will get x in one set and y in another set. 
      * 
      * how ~ works?
-     * Most (all?) modern architectures use two's complement to represent signed integers.
+     * Most (all?) modern architectures use two's complement to represent signed integers(-ve numbers).
      * The bitwise NOT is thus the complement of the integer plus one.
      * so 0000001(1 decimal) [where (000000 unassigned bits)] -> 0000001 + 1 -> 0000010 -> 
      * [2's complement] -> 1111110 [where (11111 unassigned bits inverted)]
      * 
-     * it is basically ~x = -(x+1)
      * 
      * -ve numbers are stored as 2's complement
      * 53 --> 00110101
-     * -53 --> 11001010 + 1 = 11001011
-     */
+     * -53--> 11001010 + 1 = 11001011
+     * 
+     * 
+     * If N is a number then the expression below will give the right most set bit.
+     * 
+     * Let’s dig little deep to see how this expression will work.
+     * We know that N & ~N = 0
+     * If we subtract 1 from the number, it will be subtracted from the right most set bit and that bit will be become 0.
+     * So if we negate the remaining number from step above then that bit will become 1.
+     * Now N & ~(N-1) will make all the bits 0 but the right most set bit of a number.   
+     *  
+     * ex-
+     * Say N =10, so N = 1 0 1 0,
+     * N – 1 = 1 0 1 0 – 0 0 0 1 = 1 0 0 1
+     * ~(N-1) = 0 1 1 0
+     * N & ~(N-1) = 0 0 1 0 => 2nd bit
+     * */
     const rightMostSetBit = xor & ~(xor - 1);
     let x = 0, y = 0;
     
@@ -134,8 +150,8 @@ const findDuplicateElemetsUsingEquations = (input) => {
     
     const subtrationOfTwoNumbers = Math.sqrt( Math.pow(sumOfTwoNumbers, 2) - 4 * productOfTwoNumbers);
 
-    const x = (sumOfTwoNumbers + productOfTwoNumbers) / 2;
-    const y = (sumOfTwoNumbers - productOfTwoNumbers) / 2;
+    const x = (sumOfTwoNumbers + subtrationOfTwoNumbers) / 2;
+    const y = (sumOfTwoNumbers - subtrationOfTwoNumbers) / 2;
     console.log(x, y);
 }
 

@@ -111,7 +111,8 @@ class DisjointSet {
         
         if(firstParent.rank >= secondParent.rank) {
             // increment rank only if both the parent have same rank
-            firstParent.rank = firstParent.rank === secondParent.rank ? firstParent.rank + 1: firstParent.rank;
+            if(firstParent.rank === secondParent.rank )
+                firstParent.rank++;
             secondParent.parent = firstParent;
         }
         else {

@@ -1,10 +1,12 @@
 /**
+ * radix means base of a number
  * In case of number we will be applying from LSB to MSB.
  * And In case of Alphabets order will be reversed.
  * time -> O(d * (N + b)) If we are using counting sort as subroutine, where d is the length of the longest digit.
  * space -> O(N + b) i.e N to store sorted array and k for count array.
  * b = 10 for decimal
  * b = 26 for alphabets
+ * https://medium.com/basecs/getting-to-the-root-of-sorting-with-radix-sort-f8e9240d4224
  */
 
 const radixSort = (input) => {

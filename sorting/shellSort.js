@@ -3,9 +3,13 @@
  * worst case -> Depends on gap sequence
  * average case -> O(nlog^2n) or or n^(3/2)
  * best case -> O(n)
+ * Advantages: 
+ * 1. Efficient for medium size lists(less than 5000 items).
+ * 2. fastest of all O(n^2) algorithms.
+ * 3. running time depes on the choice of increment sequence.
  */
 
-const shellShort = (input) => {
+const shellSort = (input) => {
     // let gap;
     // for(gap = 1; gap < input.length / 9; gap = 3 * gap + 1);
 
@@ -24,16 +28,15 @@ const shellShort = (input) => {
 const insertionSort = (input, gap) => {
     for(let i = gap; i < input.length; i++) {
         const currentElement = input[i];
-        let j = i -1;
-        while(currentElement < input[j] && j >= 0) {
-            input[j + 1] = input[j];
-            j--;
+
+        let j = i;
+        for(; currentElement < input[j - gap] && j >= gap; j -= gap) {
+            input[j] = input[j - gap];
         }
-        input[j + 1] = currentElement;
+        input[j] = currentElement;
     }
 }
 
 const input = [12, 34, 54, 2, 3, 12, 34, 54, 2, 3, 12, 34, 54, 2, 3];
-shellShort(input);
-
+shellSort(input);
 console.log(input);

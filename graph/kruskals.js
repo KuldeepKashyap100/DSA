@@ -1,4 +1,4 @@
-const DisjointSet =  require("../disjointSets/disjointSets");
+const DisjointSet =  require("../../disjointSets/disjointSets");
 const Graph = require("./Graph").GraphAdjacencyList;
 
 
@@ -7,9 +7,9 @@ const kruskals = (graph) => {
     const disjointSets = new DisjointSet();
     // fetch edge list
     graph.adjacencyList.forEach(fromVertex => {
-        let toVertex = fromVertex.next;
         disjointSets.makeSet(fromVertex.data);
 
+        let toVertex = fromVertex.next;
         while(fromVertex !== toVertex) {
             sortedEdgeList.push([fromVertex.data, toVertex.data, toVertex.weight]);
             toVertex = toVertex.next;

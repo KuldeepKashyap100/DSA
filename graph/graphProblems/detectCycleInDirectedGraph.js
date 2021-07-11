@@ -17,9 +17,7 @@ const hasCycle = (graph, startVertex) => {
             if(greySet.has(toVertex.data)) {
                 return true;
             }
-            if(hasCycle(graph, toVertex.data)){
-                return true;
-            }
+            return hasCycle(graph, toVertex.data);
         }
         toVertex = toVertex.next;
     }

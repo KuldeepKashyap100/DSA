@@ -1,6 +1,5 @@
 const Graph = require("../Graph").GraphAdjacencyMatrix;
 
-//not working
 const findCutBridges = (graph, fromVertex) => {
     visitedTime[fromVertex] =  lowTime[fromVertex] = time++;
 

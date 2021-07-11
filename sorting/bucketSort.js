@@ -2,6 +2,8 @@
  * Bucket sort is mainly useful when input is uniformly distributed over a range.
  * time ->
  * worst case -> O(N^2)
+ * average -> O(n + k)
+ * https://www.youtube.com/watch?v=VuXbEb5ywrU
  */
 
 // generalized counting sort (mentioned in narsimha karumanshi) I don't think it is bucket sort :)
@@ -26,12 +28,12 @@ const bucketSortGeneralizedCountingSort = (input, k) => {
 // if max element is below 100 (found it on wiki)
 const bucketSort = (input) => {
     const maxElement = Math.max(...input);
-    const buckets = Array.from({length: Math.ceil(maxElement / 10)}, _ => []);
+    const buckets = new Array(Math.ceil(maxElement / 10)).fill().map(_ => []);
 
     // Put array elements in different buckets 
     for(let i = 0; i < input.length; i++) {
-        const bucket = Math.floor(input[i] / 10);
-        buckets[bucket].push(input[i]); 
+        const bucketIdx = Math.floor(input[i] / 10);
+        buckets[bucketIdx].push(input[i]); 
     }
 
     // Sort individual buckets 

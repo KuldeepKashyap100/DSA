@@ -6,27 +6,9 @@ const Graph = require("../Graph").GraphAdjacencyList;
  * time ->  O(V*(V+E))
  */
 
-// need to refator funky logic
 
-const findEulerianCircuit = (graph, startVertex, path) => {
-    
-    const fromVertex = graph.adjacencyList[startVertex];
-    let toVertex = fromVertex.next;
-    while (toVertex !== fromVertex) { 
-        if(path.length > 1 && path[0] === path[path.length - 1])  {
-            circuitsFound.add(path);
-            return;
-        }
-        else if(!visitedEdge[fromVertex.data.toString() + toVertex.data]) {
-            visitedEdge[fromVertex.data.toString() + toVertex.data] = true;
-            path.push(toVertex.data)
-            findEulerianCircuit(graph, toVertex.data, path);
-        }
-        toVertex = toVertex.next;
-    }
-}
-
-const findEulerianCircuitUtil = () => {
+const findEulerianCircuit = () => {
+    // store edges
     for(let i=0; i<graph.adjacencyList.length; i++) {
         const fromVertex = graph.adjacencyList[i];
         let toVertex = fromVertex.next;
@@ -35,14 +17,16 @@ const findEulerianCircuitUtil = () => {
             toVertex = toVertex.next;
         }
     }
-    for(let i=0; i<graph.adjacencyList.length; i++) {
-        findEulerianCircuit(graph, i, [i]);
+
+    // visit each vertex seperately
+    for(let i = 0; i < graph.adjacencyList.length; i++) {
+        findEulerianCircuitUtil(graph, i, [i]);
     }
 
     circuitsFound = Array.from(circuitsFound);
 
     const path = circuitsFound[0];
-    for(let i=1;i<circuitsFound.length; i++) {
+    for(let i = 1; i < circuitsFound.length; i++) {
         const insertIndex = path.indexOf(circuitsFound[i][0]);
         if(insertIndex !== -1) {
             path.splice(insertIndex, 1, ...circuitsFound[i]);
@@ -51,6 +35,26 @@ const findEulerianCircuitUtil = () => {
 
     console.log(path);
 }
+
+const findEulerianCircuitUtil = (graph, startVertex, path) => {
+    const fromVertex = graph.adjacencyList[startVertex];
+    let toVertex = fromVertex.next;
+    
+    while (toVertex !== fromVertex) { 
+        if(path.length > 1 && path[0] === path[path.length - 1])  {
+            circuitsFound.add(path);
+            return;
+        }
+        else if(!visitedEdge[fromVertex.data.toString() + toVertex.data]) {
+            visitedEdge[fromVertex.data.toString() + toVertex.data] = true;
+            path.push(toVertex.data)
+            findEulerianCircuitUtil(graph, toVertex.data, path);
+        }
+        toVertex = toVertex.next;
+    }
+}
+
+
 
 
 const graphMeta = {vertex: 6, edgeList: [ [0, 1], [1, 2], [1, 3], [2, 0], [2, 3], [3, 5], [3, 4], [4, 1], [4, 2], [5, 4] ]};
@@ -61,4 +65,4 @@ graph.readEdges(false, graphMeta.edgeList);
 const visitedEdge = new Map();
 let circuitsFound = new Set();
 
-findEulerianCircuitUtil();
+findEulerianCircuit();

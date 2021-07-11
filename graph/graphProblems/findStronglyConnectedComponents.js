@@ -6,6 +6,8 @@ const Graph = require("../Graph").GraphAdjacencyList;
  * then the graph is strongly connected. 
  * 
  * time -> O(2*(V + E)) Beacuse we are performing DFS 2 times
+ * https://www.youtube.com/watch?v=RpgcYiky7uw
+ * https://www.geeksforgeeks.org/strongly-connected-components/
  */
 
 const firstDFS = (graph, startVertex) => {
@@ -42,7 +44,7 @@ const findConnectedComponents = () => {
     }
     const reversedGraph = getReversedGraph();
     vertexVisited = new Array(graph.adjacencyList.length).fill(false);
-    for(let i = 0; i < graph.adjacencyList.length; i++) {
+    while(stack.length) {
         const poppedFromStack = stack.pop();
         if(!vertexVisited[poppedFromStack]) {
             const connectedComponent = secondDFS(reversedGraph, poppedFromStack);

@@ -121,7 +121,7 @@ const originalDijkastraAlgo = (graph, sourceVertex) => {
   }
 
   console.log(distance);
-  console.log(path);
+  // console.log(path);
 
 }
 
@@ -168,7 +168,7 @@ const modifiedDijikstraAlgo = (graph, sourceVertex) => {
     }
   }
   console.log(distance);
-  console.log(path);
+  // console.log(path);
 }
 
 
@@ -205,10 +205,11 @@ const bellmanFordALgo = (graph, sourceVertex) => {
     }
   }
   console.log(distance);
-  console.log(path);
+  // console.log(path);
 }
 
-// to find minimum spanning tree
+// to find minimum spanning tree 
+// time -> O(ElogV)
 const primsAlgo = (graph, sourceVertex) => {
   const spannigTree = [];
   const distance = new Array(graph.adjacencyList.length).fill(Infinity);
@@ -239,15 +240,18 @@ const graphMeta = {vertex: 5, edgeList: [ [0, 1, 4], [0, 2, 1], [1, 4, 4], [2, 1
 
 // negative edges
 // const graphMeta = {vertex: 3, edgeList: [ [0, 1, 8], [1, 2, -5], [0, 2, 6] ]};
+// const graphMeta = {vertex: 4, edgeList: [ [0, 1, 1], [0, 2, 0], [0, 3, 99], [1, 2, 1], [3, 1, -300] ]};
+
 
 // graph with negative cycle
 // const graphMeta = {vertex: 3, edgeList: [ [0, 1, 2], [1, 2, -4], [2, 0, 1] ]};
 
 const graph = new Graph(graphMeta.vertex, graphMeta.edgeList.length, true);
 graph.readEdges(false, graphMeta.edgeList);
-originalDijkastraAlgo(graph, 0);
-bellmanFordALgo(graph, 0);
-// primsAlgo(graph, 0);
+// originalDijkastraAlgo(graph, 0);
+// modifiedDijikstraAlgo(graph, 0);
+// bellmanFordALgo(graph, 0);
+primsAlgo(graph, 0);
 
 
-process.exit();
+// process.exit();
