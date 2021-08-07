@@ -12,6 +12,11 @@ const getNextState = (pattern, state, alphabetCharater) => {
     }
 
     let i;
+    // nextState finally contains the longest prefix
+    // which is also suffix in "pat[0..state-1]c"
+
+    // Start from the largest possible value
+    // and stop when you find a prefix which
     for(let nextState = state; nextState > 0; nextState--) {
         if(pattern[nextState - 1] === alphabetCharater) {
             for(i = 0; i < nextState - 1; i++) {

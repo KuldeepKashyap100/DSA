@@ -13,7 +13,7 @@ const primsAlgo = (graph, sourceVertex) => {
         const fromVertex = priorityQueue.dequeue();
         let toVertex = fromVertex.next;
         while(toVertex !== fromVertex) {
-            if(distance[toVertex.data] > distance[fromVertex.data] + toVertex.weight) {
+            if(distance[toVertex.data] > toVertex.weight) {
                 distance[toVertex.data] = toVertex.weight;
                 spannigTree[toVertex.data] = fromVertex.data.toString() + toVertex.data.toString();
                 priorityQueue.enqueue(graph.adjacencyList[toVertex.data], toVertex.weight);

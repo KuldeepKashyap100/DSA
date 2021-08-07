@@ -210,7 +210,7 @@ class Graph {
             const fromVertex = pq.deQueue().value;
             let toVertex = fromVertex.next;
             while(toVertex !== fromVertex) {
-                if(distance[toVertex.value] > distance[fromVertex.value] + toVertex.weight) {
+                if(distance[toVertex.value] > toVertex.weight) {
                     distance[toVertex.value] = toVertex.weight;
                     edges[toVertex.value] = "" + fromVertex.value + toVertex.value;
                     pq.enQueue(new QueueNode(this.adjacencyList[toVertex.value], toVertex.weight));

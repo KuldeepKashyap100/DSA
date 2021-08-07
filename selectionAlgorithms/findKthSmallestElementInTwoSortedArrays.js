@@ -82,4 +82,5 @@ const moreEfficientApproach = (a, b, aLeft, aRight, bLeft, bRight, k) => {
 let first = [1, 12, 15, 26, 38];
 let second = [2, 13, 17, 30, 45];
 // findKthSmallestElementInTwoSortedArrays(first, second, 2);
-efficientApproach(first, second, 0, first.length - 1, 0, second.length - 1, 1);
+// efficientApproach(first, second, 0, first.length - 1, 0, second.length - 1, 3);
+moreEfficientApproach(first, second, 0, first.length - 1, 0, second.length - 1, 3);

@@ -222,7 +222,7 @@ const primsAlgo = (graph, sourceVertex) => {
       const fromVertex = priorityQueue.dequeue();
       let toVertex = fromVertex.next;
       while(toVertex !== fromVertex) {
-          if(distance[toVertex.data] > distance[fromVertex.data] + toVertex.weight) {
+          if(distance[toVertex.data] > toVertex.weight) {
               distance[toVertex.data] = toVertex.weight;
               spannigTree[toVertex.data] = fromVertex.data.toString() + toVertex.data.toString();
               priorityQueue.enqueue(graph.adjacencyList[toVertex.data], toVertex.weight);
@@ -235,8 +235,8 @@ const primsAlgo = (graph, sourceVertex) => {
 }
 
 // basic examples
-const graphMeta = {vertex: 5, edgeList: [ [0, 1, 4], [0, 2, 1], [1, 4, 4], [2, 1, 2], [2, 3, 4], [3, 4, 4] ]};
-// const graphMeta = {vertex: 5, edgeList: [ [1, 4, 2], [3, 1, 1], [1, 3, 2], [0, 1, -1], [0, 2, 4], [3, 2, 5], [1, 2, 3], [4, 3, -3] ]};
+// const graphMeta = {vertex: 5, edgeList: [ [0, 1, 4], [0, 2, 1], [1, 4, 4], [2, 1, 2], [2, 3, 4], [3, 4, 4] ]};
+const graphMeta = {vertex: 5, edgeList: [ [1, 4, 2], [3, 1, 1], [1, 3, 2], [0, 1, -1], [0, 2, 4], [3, 2, 5], [1, 2, 3], [4, 3, -3] ]};
 
 // negative edges
 // const graphMeta = {vertex: 3, edgeList: [ [0, 1, 8], [1, 2, -5], [0, 2, 6] ]};
