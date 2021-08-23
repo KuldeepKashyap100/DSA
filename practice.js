@@ -606,3 +606,61 @@ class Kmp {
 }
 // const kmp = new Kmp("abcaby");
 // kmp.compare("abxabcabcabk");
+
+class TrieNode {
+    constructor(data) {
+        this.data = data;
+        this.terminating = 0;
+        this.children = new Array(26).fill(null);
+    }
+    nextChild(parentChar) {
+        return this.children.find(char => char && char.data === parentChar);
+    }
+}
+
+class Trie {
+    constructor() {
+        this.root = new TrieNode(null);
+    }
+    insert(word) {
+        let currentNode = this.root;
+        for(const char of word) {
+            if(!currentNode.children[char.charCodeAt(0) - 97])
+                currentNode.children[char.charCodeAt(0) - 97] = new TrieNode(char);
+            currentNode = currentNode.nextChild(char);
+        }
+        currentNode.terminating++;
+    }
+    search(word) {
+        let currentNode = this.root;
+        for(const char of word) {
+            currentNode = currentNode.nextChild(char);
+            if(!currentNode) throw new Error("not found");
+        }
+        console.log(currentNode.terminating);
+        return true;
+    }
+    delete(word) {
+        let currentNode = this.root;
+        if(!this.search(word)) throw new Error("not found");
+        for(const char of word) {
+            currentNode = currentNode.nextChild(char);
+        }
+        currentNode.terminating--;
+    }
+    update(oldWord, newWord) {
+        this.delete(oldWord);
+        this.insert(newWord);
+    }
+}
+
+const trie = new Trie();
+const input = ["pqrs", "pprt", "psst", "qqrs", "pqrs"];
+input.forEach(str => trie.insert(str));
+trie.search("pqrs");
+trie.delete("pqrs");
+trie.search("pqrs");
+
+
+// trie.update("pprt", "pppp");
+// trie.search("pppp");

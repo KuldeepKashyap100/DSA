@@ -23,43 +23,43 @@ class Trie {
     }
     
     // O(l) where l is the length of the string
-    search(targetStr) {
-        if(!targetStr) return null;
+    search(word) {
+        if(!word) return null;
 
-        let currentChar = this.root;
-        for(let i = 0; i < targetStr.length; i++) {
-            currentChar = currentChar.nextChild(targetStr[i]);
-            if(!currentChar) {
+        let currentNode = this.root;
+        for(const char of word) {
+            currentNode = currentNode.nextChild(char);
+            if(!currentNode) {
                 console.log("not found");
                 return;
             }
         }
-        console.log("found " + currentChar.terminating + " times");
-        return currentChar.terminating;
+        console.log("found " + currentNode.terminating + " times");
+        return currentNode.terminating;
     }
 
     // O(l) where l is the length of the string
-    insert(strToBeInserted) {
-        let currentChar = this.root;
-        for(let i = 0; i < strToBeInserted.length; i++) {
-            if(!currentChar.childNodes[strToBeInserted.charCodeAt(i) - "a".charCodeAt(0)]) {
-                currentChar.childNodes[strToBeInserted.charCodeAt(i) - "a".charCodeAt(0)] = new TrieNode(strToBeInserted[i]);
+    insert(word) {
+        let currentNode = this.root;
+        for(const char of word) {
+            if(!currentNode.childNodes[char.charCodeAt(0) - 97]) {
+                currentNode.childNodes[char.charCodeAt(0) - 97] = new TrieNode(char);
             }
-            currentChar = currentChar.nextChild(strToBeInserted[i]);
+            currentNode = currentNode.nextChild(char);
         }
-        currentChar.terminating++;
+        currentNode.terminating++;
     }
 
     // O(l) where l is the length of the string
-    delete(strToBeDeleted) {
-        let currentChar = this.root;
-        for(let i = 0; i < strToBeDeleted.length; i++) {
-            if(!currentChar) {
+    delete(word) {
+        let currentNode = this.root;
+        for(const char of word) {
+            if(!currentNode) {
                 throw new Error("Not present");
             }
-            currentChar = currentChar.nextChild(strToBeDeleted[i]);
+            currentNode = currentNode.nextChild(char);
         }
-        currentChar.terminating--;
+        currentNode.terminating--;
     }
 
     // O(l) where l is the length of the string
