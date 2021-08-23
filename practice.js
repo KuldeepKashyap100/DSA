@@ -556,5 +556,53 @@ const sorting = new Sorting([170, 45, 75, 90, 802, 24, 2, 66]);
 // sorting.quickSort();
 // sorting.countingSort();
 // sorting.bucketSort();
-sorting.radixSort();
-sorting.display();
+// sorting.radixSort();
+// sorting.display();
+
+class Kmp {
+    constructor(pattern) {
+        this.pattern = pattern;
+        this.prefixTable = [0];
+        this.buildPrefixTable();
+    }
+    buildPrefixTable() {
+        let j = 0, i = 1;
+        while(i < this.pattern.length) {
+            if(this.pattern[i] === this.pattern[j]) {
+                this.prefixTable[i] = j + 1;
+                i++;
+                j++;
+            }
+            else if(j > 0) {
+                j = this.prefixTable[j - 1];
+            }
+            else {
+                this.prefixTable[i] = 0;
+                i++;
+            }
+        }
+    }
+    compare(text) {
+        console.log(this.prefixTable);
+        let i = 0, j = 0;
+        while(i < text.length) {
+            if(text[i] === this.pattern[j]) {
+                if(j === this.pattern.length - 1) {
+                    console.log("Found");
+                    return;
+                }
+                i++;
+                j++;
+            }
+            else if(j > 0) {
+                j = this.prefixTable[j - 1];
+            }
+            else {
+                i++;
+            }
+        }
+        console.log("not found");
+    }
+}
+// const kmp = new Kmp("abcaby");
+// kmp.compare("abxabcabcabk");

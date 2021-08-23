@@ -36,7 +36,7 @@ const calculateHash = (input, start, end) => {
 
 const reCalculateHash = (input, oldStart, newEnd, currentHash, patternLength) => {
     const removedOldChar = (currentHash - (Math.pow(10, patternLength - 1) * input.charCodeAt(oldStart)))
-    const newHash = (currentHash - (Math.pow(10, patternLength - 1) * input.charCodeAt(oldStart))) * 10 + input.charCodeAt(newEnd);
+    const newHash = (currentHash - removedOldChar) * 10 + input.charCodeAt(newEnd);
     // const newHash = (currentHash - (Math.pow(10, patternLength - 1) * map[input[oldStart]])) * 10 + map[input[newEnd]];
     return newHash;
 }

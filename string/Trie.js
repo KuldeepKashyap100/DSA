@@ -1,4 +1,5 @@
 /**
+ * https://www.youtube.com/watch?v=YG6iX28hmd0&t=123s
  * Options to store strings and their problems: 
  * 1. hashmap -> ordering is lost.
  * 2. BST -> compare the entire string length to check equality.

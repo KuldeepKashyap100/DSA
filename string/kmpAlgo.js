@@ -54,5 +54,7 @@ const kmpAlgo = (text, pattern) => {
 }
 
 const text = "abxabcabcaby";
-const pattern = "abcaby";
+// const pattern = "abcaby";
+const pattern = "abcdabca";
+const pattern = "aabaabaaa";
 kmpAlgo(text, pattern);
