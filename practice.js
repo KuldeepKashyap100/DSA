@@ -485,9 +485,9 @@ class Sorting {
         this.array = sortedArray;
     }
     bucketSort() {
-        const totalBuckets = Math.floor(Math.max(...this.array) + 1);
+        const totalBuckets = Math.max(...this.array);
         // make buckets
-        const buckets = new Array(Math.floor(totalBuckets)).fill().map(_ => []);
+        const buckets = new Array(Math.ceil(totalBuckets / 10)).fill().map(_ => []);
 
         // place elements in buckets
         for(let i = 0; i < this.array.length; i++) {
@@ -555,7 +555,7 @@ const sorting = new Sorting([170, 45, 75, 90, 802, 24, 2, 66]);
 // sorting.mergeSort();
 // sorting.quickSort();
 // sorting.countingSort();
-// sorting.bucketSort();
+sorting.bucketSort();
 // sorting.radixSort();
 // sorting.display();
 
@@ -654,13 +654,86 @@ class Trie {
     }
 }
 
-const trie = new Trie();
-const input = ["pqrs", "pprt", "psst", "qqrs", "pqrs"];
-input.forEach(str => trie.insert(str));
-trie.search("pqrs");
-trie.delete("pqrs");
-trie.search("pqrs");
+// const trie = new Trie();
+// const input = ["pqrs", "pprt", "psst", "qqrs", "pqrs"];
+// input.forEach(str => trie.insert(str));
+// trie.search("pqrs");
+// trie.delete("pqrs");
+// trie.search("pqrs");
 
 
-// trie.update("pprt", "pppp");
-// trie.search("pppp");
+class TSTNode {
+    constructor(data) {
+        this.data = data;
+        this.left = null;
+        this.eq = null;
+        this.right = null;
+        this.terminating = 0;
+    }
+}
+
+class TernarySearchTrees {
+    constructor() {
+        this.root = null;
+    }
+    insert(word) {
+        this.root = this.insertUtil(this.root, word, 0);
+    }
+    insertUtil(root, word, idx) {
+        const char = word[idx++];
+        if(!root) {
+            const newNode = new TSTNode(char);
+            if(idx === word.length - 1) 
+                newNode.terminating++;
+            else
+                newNode.eq = this.insertUtil(root, word, idx);
+            return newNode;
+        }
+        if(root.data < char) root.left = this.insertUtil(root.left, word, idx);
+        else if(root.data > char) root.right = this.insertUtil(root.right, word, idx);
+        else {
+            if(idx === word.length - 1 && root.terminating)
+                root.terminating++;
+            else
+                root.eq = this.insertUtil(root.eq, word, idx);
+        }
+        return root;
+    }
+    search(word) {
+        let root = this.root, idx = 0;
+        while(root) {
+            const char = word[idx++];
+            if(root.data < char) root = root.left;
+            else if(root.data > char) root = root.right;
+            else {
+                if(idx === word.length - 1) {
+                    console.log("Found " + root.terminating + " times");
+                }
+                    
+                root = root.eq;
+            }
+        }
+    }
+    delete(word) {
+        let root = this.root, idx = 0;
+        while(root) {
+            const char = word[idx++];
+            if(root.data < char) root = root.left;
+            else if(root.data > char) root = root.right;
+            else {
+                if(idx === word.length - 1 && root.terminating) {
+                    root.terminating--;
+                    return;
+                }
+                root = root.eq;
+            }
+        }
+    }
+}
+
+// const tst = new TernarySearchTrees();
+// const input = ["pqrs", "pprt", "psst", "qqrs", "pqrs"];
+// input.forEach(str => tst.insert(str));
+// tst.search("pqrs");
+// tst.delete("pqrs");
+// tst.search("pqrs");

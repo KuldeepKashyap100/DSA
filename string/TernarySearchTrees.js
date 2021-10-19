@@ -37,7 +37,6 @@ class TernarySearchTrees {
         console.log("not found");
     }
 
-    // try writing recursive version of it if got time.
     // time -> O(L) where L is length of the longest string
     insert(strToBeInserted) {
         this.root = this.insertNode(this.root, strToBeInserted, 0);
@@ -48,12 +47,11 @@ class TernarySearchTrees {
             const newNode = new Node(strToBeInserted[i]);
             if(i === strToBeInserted.length - 1) {
                 newNode.terminating++;
-                return newNode
             }
             else {
                 newNode.eq = this.insertNode(newNode.eq, strToBeInserted, i + 1);
-                return newNode;
             }
+            return newNode;
         }
         
         if(strToBeInserted[i] < root.data) {

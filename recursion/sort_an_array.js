@@ -1,8 +1,8 @@
-const sort = (inputArr, endIndex) => {
+const sort = (inputArr) => {
     if(inputArr.length === 1)
         return;
     const lastElement = inputArr.pop();
-    sort(inputArr, endIndex-1);
+    sort(inputArr);
     insert(inputArr, lastElement); // induction step if sort
 }
 
@@ -36,5 +36,5 @@ const insert = (inputArr, element) => {
 // }
 
 let array = [5,2,3,8,1,4];
-sort(array, array.length-1);
+sort(array);
 console.log(array);

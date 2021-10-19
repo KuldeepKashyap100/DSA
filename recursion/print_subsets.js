@@ -11,4 +11,4 @@ const printSubsets = (input, output) => {
     printSubsets(input, secondOutput);
 }
 
-printSubsets("ab","");
+printSubsets("abc","");

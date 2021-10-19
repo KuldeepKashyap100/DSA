@@ -3,11 +3,10 @@ const permutationWithSpaces = (input, output) => {
         console.log(output);
         return;
     }
-    const firstOutput = output + input[0];
-    const secondOutput = output+'_'+input[0];
-    input = input.substr(1);
-    permutationWithSpaces(input, firstOutput);
-    permutationWithSpaces(input, secondOutput);
+    if(output.length > 0) {
+        permutationWithSpaces(input.slice(1), output + "_" +  input[0]);
+      }
+    permutationWithSpaces(input.slice(1), output + input[0]);
 }
 
 let input = "ABC";

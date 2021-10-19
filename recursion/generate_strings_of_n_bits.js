@@ -1,13 +1,11 @@
-function binary(n) {
-    if(n<1)
-        console.log(a);
-    else {
-        a[n-1] =0;
-        binary(n-1);
-        a[n-1] = 1;
-        binary(n-1);
+function generateBinaryStrings(n, output) {
+    if(n === 0) {
+      console.log(output);
+      return;
     }
+    generateBinaryStrings(n - 1, output + "0");
+    generateBinaryStrings(n - 1, output + "1");
+    
 }
-a = [];
-
-binary(2);
+  
+generateBinaryStrings(2, "");  

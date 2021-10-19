@@ -233,3 +233,32 @@
 // }
 
 // perfectSubstring("1102021222", 2);
+
+// const setIntervalList = [];
+
+// const setIntervalPolyFill = (callback, delay) => {
+// 	const stopFlag = { stop: false };
+//     startLoop(callback, delay, stopFlag);
+// 	setIntervalList.push(stopFlag);
+// 	return setIntervalList.length - 1;
+// };
+
+// const startLoop = (callback, delay, stopFlag) => {
+//     if(stopFlag.stop) return;
+//     setTimeout(() => {
+//         callback();
+//         startLoop(callback, delay, stopFlag);
+//     }, delay);
+// }
+
+// clearIntervalPolyFill = (intervalIdx) => {
+//     const interval = setIntervalList.splice(intervalIdx, 1)[0];
+//     interval.stop = true;
+// }
+
+// let count = 0;
+// const idx = setIntervalPolyFill(()=> {
+//     console.log(count++)
+// }, 1000);
+
+// setTimeout(() => clearIntervalPolyFill(idx), 10000);
