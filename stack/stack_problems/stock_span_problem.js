@@ -44,6 +44,7 @@ const Stack = require("../Stack").LinkedListStack;
 // }
 
 
+
 // easily understandable written by self
 // find nearest greater to left(index) of every element
 // and then subtract the current index from it to get sum consecutive elements
